@@ -3,7 +3,20 @@ CREATE USER invoices_user WITH ENCRYPTED PASSWORD 'invoices';
 CREATE DATABASE invoices;
 GRANT ALL PRIVILEGES ON DATABASE invoices TO invoices_user;
 
-
+create table RegisterSeller(
+	ID uuid PRIMARY KEY,
+	SellerID uuid,
+	CompanyName Varchar(100),
+	Street Varchar(100),
+	City Varchar(100),
+	PostalCode varchar(7),
+	BankName varchar(100),
+	BankAccountNumber varchar(26),
+	Bankswift varchar(10),
+	ModifyDate DateTime,
+	Version int(3),
+	NIP varchar(10)
+);
 
 create table Seller(
 	ID uuid PRIMARY KEY,
@@ -14,7 +27,19 @@ create table Seller(
 	BankName varchar(100),
 	BankAccountNumber varchar(26),
 	Bankswift varchar(10),
+	ModifyDate DateTime,
+	Version int(3),
 	NIP varchar(10)
+);
+
+create table RegisterCustomer(
+	ID uuid PRIMARY KEY,
+	CustomerID uuid,
+	ID_Organization uuid,
+	Name varchar(100),
+	Surname varchar(100),
+	ModifyDate DateTime,
+	Version int(3)
 );
 
 create table Customer(
@@ -22,6 +47,20 @@ create table Customer(
 	ID_Organization uuid,
 	Name varchar(100),
 	Surname varchar(100),
+	ModifyDate DateTime,
+	Version int(3)
+);
+
+create table RegisterCustomerOrganization(
+	ID uuid PRIMARY KEY,
+	ID_CustomerOrganization uuid,
+	Name varchar(100),
+	Street varchar(100),
+	City varchar(100),
+	PostalCode varchar(7),
+	Nip varchar(10),
+	ModifyDate DateTime,
+	Version int(3)
 );
 
 create table CustomerOrganization(
@@ -30,7 +69,9 @@ create table CustomerOrganization(
 	Street varchar(100),
 	City varchar(100),
 	PostalCode varchar(7),
-	Nip varchar(10)
+	Nip varchar(10),
+	ModifyDate DateTime,
+	Version int(3),
 );
 create table Product(
 	ID uuid PRIMARY KEY,
