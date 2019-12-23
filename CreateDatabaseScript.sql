@@ -13,8 +13,8 @@ create table RegisterSeller(
 	BankName varchar(100),
 	BankAccountNumber varchar(26),
 	Bankswift varchar(10),
-	ModifyDate DateTime,
-	Version int(3),
+	ModifyDate Date,
+	Version int,
 	NIP varchar(10)
 );
 
@@ -27,8 +27,8 @@ create table Seller(
 	BankName varchar(100),
 	BankAccountNumber varchar(26),
 	Bankswift varchar(10),
-	ModifyDate DateTime,
-	Version int(3),
+	ModifyDate Date,
+	Version int,
 	NIP varchar(10)
 );
 
@@ -38,8 +38,8 @@ create table RegisterCustomer(
 	ID_Organization uuid,
 	Name varchar(100),
 	Surname varchar(100),
-	ModifyDate DateTime,
-	Version int(3)
+	ModifyDate Date,
+	Version int
 );
 
 create table Customer(
@@ -47,8 +47,8 @@ create table Customer(
 	ID_Organization uuid,
 	Name varchar(100),
 	Surname varchar(100),
-	ModifyDate DateTime,
-	Version int(3)
+	ModifyDate Date,
+	Version int
 );
 
 create table RegisterCustomerOrganization(
@@ -59,8 +59,8 @@ create table RegisterCustomerOrganization(
 	City varchar(100),
 	PostalCode varchar(7),
 	Nip varchar(10),
-	ModifyDate DateTime,
-	Version int(3)
+	ModifyDate Date,
+	Version int
 );
 
 create table CustomerOrganization(
@@ -70,14 +70,14 @@ create table CustomerOrganization(
 	City varchar(100),
 	PostalCode varchar(7),
 	Nip varchar(10),
-	ModifyDate DateTime,
-	Version int(3),
+	ModifyDate Date,
+	Version int
 );
 create table Product(
 	ID uuid PRIMARY KEY,
 	Name varchar(100),
 	NetPrice decimal(2),
-	VatRate int(2),
+	VatRate int,
 	VatValue decimal(2),
 	GrossValue decimal(2)
 );
@@ -85,15 +85,15 @@ create table Product(
 create table Invoice(
 	ID uuid Primary key,
 	CustomerID uuid,
-	Number int(10),
-	CreationDate DateTime,
-	SaleDate DateTime,
+	Number int,
+	CreationDate Date,
+	SaleDate Date,
 	PaymentType varchar(100),
 	PaymentDeadline varchar(100),
 	ToPay decimal(2),
 	Paid decimal(2),
 	LeftToPay decimal(2),
 	Remarks varchar(100),
-	Status int(2),
+	Status int,
 	SellerId uuid
 );
