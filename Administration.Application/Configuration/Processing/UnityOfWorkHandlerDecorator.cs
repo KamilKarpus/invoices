@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Infrastructure;
 using MediatR;
 
-namespace Administration.Application.Configuration.DataAccess.Processing
+namespace Administration.Application.Configuration.Processing
 {
     public class UnityOfWorkHandlerDecorator<T> : ICommandHandler<T> where T : ICommand
     {
@@ -21,7 +21,7 @@ namespace Administration.Application.Configuration.DataAccess.Processing
         {
            await _decorated.Handle(request, cancellationToken);
            await _unityOfWork.CommitAsync();
-            return Unit.Value;
+           return Unit.Value;
         }
     }
 }

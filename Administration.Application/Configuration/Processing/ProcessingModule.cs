@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Autofac;
 
-namespace Administration.Application.Configuration.DataAccess.Processing
+namespace Administration.Application.Configuration.Processing
 {
     public class ProcessingModule : Autofac.Module
     {

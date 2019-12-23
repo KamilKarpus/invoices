@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Administration.Application.Configuration.DataAccess.Processing
+namespace Administration.Application.Configuration.Processing
 {
     public interface IQuery<out TResult> : IRequest<TResult>
     {

@@ -3,7 +3,7 @@ using Administration.Application.Configuration;
 using Autofac;
 using MediatR;
 
-namespace Administration.Application.Configuration.DataAccess.Processing
+namespace Administration.Application.Configuration.Processing
 {
     public static class AdministrationExecutor
     {
