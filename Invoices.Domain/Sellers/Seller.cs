@@ -16,11 +16,13 @@ namespace Administration.Domain.Sellers
         public string PostalCode { get; private set; }
         public string BankName { get; private set; }
 
-        public string BankAcountNumber { get; private set; }
+        public string BankAccountNumber { get; private set; }
         public string BankSwift { get; private set; }
         public string NIP { get; private set; }
+
+        private Seller() { }
         public Seller(string companyName, string street, string city, string postalCode, string bankName, 
-            string bankAcountNumber, string bankSwift, string nip)
+            string bankAccountNumber, string bankSwift, string nip)
         {
             Id = Guid.NewGuid();
             CompanyName = companyName;
@@ -28,10 +30,10 @@ namespace Administration.Domain.Sellers
             City = city;
             PostalCode = postalCode;
             BankName = bankName;
-            BankAcountNumber = bankAcountNumber;
+            BankAccountNumber = bankAccountNumber;
             BankSwift = bankSwift;
             NIP = nip;
-            AddDomainEvent(new SellerCreatedDomainEvent(Id,CompanyName, Street, City, PostalCode, BankName, BankAcountNumber,BankSwift, NIP));
+            AddDomainEvent(new SellerCreatedDomainEvent(Id,CompanyName, Street, City, PostalCode, BankName, BankAccountNumber,BankSwift, NIP));
         }
 
     }

@@ -9,7 +9,8 @@ namespace Administration.Application.Configuration.Processing
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterGenericDecorator(typeof(ICommandHandler<>), typeof(ICommand));
+            builder.RegisterGenericDecorator(typeof(UnityOfWorkHandlerDecorator<>), typeof(ICommandHandler<>));
+                
         }
     }
 }

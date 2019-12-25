@@ -11,17 +11,21 @@ namespace Administration.Application.Configuration.DataAccess.EntityConfiguratio
     {
         public void Configure(EntityTypeBuilder<Seller> builder)
         {
-            builder.ToTable("Seller");
-            builder.HasKey(p => p.Id);
-            builder.Property(p => p.CompanyName);
-            builder.Property(p => p.BankSwift);
-            builder.Property(p => p.BankName);
-            builder.Property(p => p.BankAcountNumber);
-            builder.Property(p => p.City);
-            builder.Property(p => p.Street);
-            builder.Property(p => p.NIP);
-            builder.Property(p => p.Version);
-            builder.Property(p => p.ModifyDate);
+            builder.ToTable("seller","public");
+            builder.HasKey(p => p.Id).HasName("id");
+            builder.Property(p => p.Id).HasColumnName("id");
+            builder.Property(p => p.CompanyName).HasColumnName("companyname");
+            builder.Property(p => p.BankSwift).HasColumnName("bankswift");
+            builder.Property(p => p.BankName).HasColumnName("bankname");
+            builder.Property(p => p.BankAccountNumber).HasColumnName("bankaccountnumber");
+            builder.Property(p => p.City).HasColumnName("city");
+            builder.Property(p => p.Street).HasColumnName("street");
+            builder.Property(p => p.NIP).HasColumnName("nip");
+            builder.Property(p => p.Version).HasColumnName("version");
+            builder.Property(p => p.ModifyDate).HasColumnName("modifydate");
+            builder.Property(p => p.PostalCode).HasColumnName("postalcode");
+
+            
         }
     }
 }

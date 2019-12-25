@@ -1,4 +1,6 @@
 ﻿using Administration.Application.Configuration.DataAccess;
+using Administration.Application.Configuration.Medation;
+using Administration.Application.Configuration.Processing;
 using Autofac;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,9 @@ namespace Administration.Application.Configuration
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule(new DataAccessModule(connectionString));
+            containerBuilder.RegisterModule(new ProcessingModule());
+            containerBuilder.RegisterModule(new MediatorModule());
+
             var container =  containerBuilder.Build();
             AdministrationsCompositionRoot.SetContainer(container);
         }

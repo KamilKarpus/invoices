@@ -22,9 +22,15 @@ namespace Administration.Application.Configuration.DataAccess
                 dbContextOptionsBuilder.UseNpgsql(_dbConnectionString);
 
                 return new AdministrationContext(dbContextOptionsBuilder.Options);
-            }).AsSelf();
+            }).AsSelf()
+            .AsImplementedInterfaces()
+            .InstancePerLifetimeScope();
 
-            builder.RegisterType<AdministrationContext>().As<IUnityOfWork>();
+            builder.RegisterAssemblyTypes(ThisAssembly)
+              .Where(type => type.Name.EndsWith("Repository"))
+              .AsImplementedInterfaces()
+              .InstancePerLifetimeScope()
+              .FindConstructorsWith(new AllConstructorFinder()); ;
         }
     }
 }

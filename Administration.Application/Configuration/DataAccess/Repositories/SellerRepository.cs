@@ -17,8 +17,6 @@ namespace Administration.Application.Configuration.DataAccess.Repositories
             _context = context;
         }
 
-        public IUnityOfWork UnityOfWork => _context;
-
         public async Task AddAsync(Seller seller)
         {
             await _context.AddAsync(seller);

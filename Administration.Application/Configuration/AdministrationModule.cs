@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
-using Administration.Application.Configuration;
+using Administration.Application.Configuration.Processing;
 using Autofac;
 using MediatR;
 
-namespace Administration.Application.Configuration.Processing
+namespace Administration.Application.Configuration
 {
-    public static class AdministrationExecutor
+    public class AdministrationModule : IAdministrationModule
     {
-        public static async Task ExecuteCommand(ICommand command)
+        public async Task ExecuteCommand(ICommand command)
         {
             using (var scope = AdministrationsCompositionRoot.BeginLifetimeScope())
             {
@@ -16,7 +16,7 @@ namespace Administration.Application.Configuration.Processing
             }
         }
 
-        public static async Task<TResult> ExecuteQuery<TResult>(IQuery<TResult> query)
+        public async Task<TResult> ExecuteQuery<TResult>(IQuery<TResult> query)
         {
             using (var scope = AdministrationsCompositionRoot.BeginLifetimeScope())
             {
