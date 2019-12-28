@@ -28,6 +28,7 @@ namespace Invoices.Application.Configuration.DataAccess
               .InstancePerLifetimeScope();
 
             builder.RegisterType<RegisterSellerService>().AsSelf();
+            builder.RegisterType<RegisterOrganizationService>().AsSelf();
 
             var invoicesAssembly = typeof(DataAccessModule).Assembly;
 

@@ -29,12 +29,14 @@ namespace Administration.Domain.Customers
             City = city;
             PostalCode = postalcode;
             Nip = nip;
+            AddDomainEvent(new OrganizationCreatedDomainEvent(id, name, street, city, postalcode, nip));
         }
         public void AddCustomer(string name, string surname)
         {
-            var customer = new Customer(Guid.NewGuid(), name, surname, Id);
+            var userid = Guid.NewGuid();
+            var customer = new Customer(userid, name, surname, Id);
             _customers.Add(customer);
-            AddDomainEvent(new AddCustomerDomainEvent());
+            AddDomainEvent(new AddCustomerDomainEvent(userid, name, surname, Id));
         }
     }
 }

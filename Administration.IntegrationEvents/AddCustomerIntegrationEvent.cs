@@ -1,17 +1,17 @@
-﻿using Invoices.Common.DomainEvents;
+﻿using EventServiceBus.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Administration.Domain.DomainEvents.Organization
+namespace Adminstration.IntegrationEvents
 {
-    public class AddCustomerDomainEvent : DomainEvent
+    public class AddCustomerIntegrationEvent : IIntegrationEvent
     {
         public Guid CustomerId { get; private set; }
         public string Name { get; private set; }
         public string LastName { get; private set; }
         public Guid OrganizationId { get; private set; }
-        public AddCustomerDomainEvent(Guid customerid, string name, string lastName, Guid organizationid)
+        public AddCustomerIntegrationEvent(Guid customerid, string name, string lastName, Guid organizationid)
         {
             CustomerId = customerid;
             Name = name;

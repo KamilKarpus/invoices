@@ -20,14 +20,7 @@ namespace Invoices.Application.Configuration.Processing
         public async Task<Unit> Handle(T request, CancellationToken cancellationToken)
         {
            await _decorated.Handle(request, cancellationToken);
-            try
-            {
-                await _unityOfWork.CommitAsync();
-            }
-            catch(Exception ex)
-            {
-
-            }
+           await _unityOfWork.CommitAsync();
            return Unit.Value;
         }
     }
