@@ -18,7 +18,7 @@ namespace Administration.Application.Commands.Handlers
         }
         public async Task<Unit> Handle(AddSellerCommand request, CancellationToken cancellationToken)
         {
-           await _repository.AddAsync(new Domain.Sellers.Seller(request.CompanyName,request.Street, request.City, request.PostalCode, request.BankName,request.BankAccountNumber,request.BankSwift, request.NIP));
+           await _repository.AddAsync(new Domain.Sellers.Seller(request.SellerId,request.CompanyName,request.Street, request.City, request.PostalCode, request.BankName,request.BankAccountNumber,request.BankSwift, request.NIP));
            return Unit.Value;
         }
     }

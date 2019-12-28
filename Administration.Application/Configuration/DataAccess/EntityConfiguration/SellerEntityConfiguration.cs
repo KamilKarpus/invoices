@@ -24,8 +24,6 @@ namespace Administration.Application.Configuration.DataAccess.EntityConfiguratio
             builder.Property(p => p.Version).HasColumnName("version");
             builder.Property(p => p.ModifyDate).HasColumnName("modifydate");
             builder.Property(p => p.PostalCode).HasColumnName("postalcode");
-
-            
         }
     }
 }

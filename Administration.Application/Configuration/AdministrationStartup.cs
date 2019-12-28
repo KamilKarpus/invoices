@@ -1,4 +1,5 @@
 ﻿using Administration.Application.Configuration.DataAccess;
+using Administration.Application.Configuration.EventBus;
 using Administration.Application.Configuration.Medation;
 using Administration.Application.Configuration.Processing;
 using Autofac;
@@ -20,9 +21,11 @@ namespace Administration.Application.Configuration
             containerBuilder.RegisterModule(new DataAccessModule(connectionString));
             containerBuilder.RegisterModule(new ProcessingModule());
             containerBuilder.RegisterModule(new MediatorModule());
+            containerBuilder.RegisterModule(new EventBusModule());
 
             var container =  containerBuilder.Build();
             AdministrationsCompositionRoot.SetContainer(container);
+            EventBusStartup.Subcribe();
         }
 
     }

@@ -13,8 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Administration.Domain\Administration.Domain.csproj" />
+    <ProjectReference Include="..\Administration.IntegrationEvents\Adminstration.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\EventServiceBus\EventServiceBus.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\Invoices.Domain\Administration.Domain.csproj" />
   </ItemGroup>
 
 </Project>

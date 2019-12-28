@@ -3,16 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Invoices.Common.Aggregate
+namespace Invoices.Common.Entitys
 {
-    public abstract class AggregateRoot
+    public abstract class Entity
     {
         public int Version { get; private set; }
         public DateTime ModifyDate {get; private set;}
 
         private readonly List<DomainEvent> _domainEvents;
 
-        public AggregateRoot()
+        public Entity()
         {
             Version = 0;
            _domainEvents = new List<DomainEvent>();

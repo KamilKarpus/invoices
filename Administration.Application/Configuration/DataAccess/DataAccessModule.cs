@@ -23,8 +23,14 @@ namespace Administration.Application.Configuration.DataAccess
 
                 return new AdministrationContext(dbContextOptionsBuilder.Options);
             }).AsSelf()
-            .AsImplementedInterfaces()
+            .As<DbContext>()
             .InstancePerLifetimeScope();
+
+            builder.RegisterType<PostgresChangeTracker>()
+                .AsImplementedInterfaces();
+
+            builder.RegisterType<UnityOfWork>()
+                .AsImplementedInterfaces();
 
             builder.RegisterAssemblyTypes(ThisAssembly)
               .Where(type => type.Name.EndsWith("Repository"))

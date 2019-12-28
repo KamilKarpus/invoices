@@ -7,6 +7,7 @@ namespace Administration.Application.Commands
 {
     public class AddSellerCommand : ICommand
     {
+        public Guid SellerId {get; set;}
         public string CompanyName { get; set; }
 
         public string Street { get; set; }

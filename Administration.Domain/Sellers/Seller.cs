@@ -1,12 +1,12 @@
 ﻿using Administration.Domain.DomainEvents.Sellers;
-using Invoices.Common.Aggregate;
+using Invoices.Common.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Administration.Domain.Sellers
 {
-    public class Seller : AggregateRoot
+    public class Seller : Entity
     {
         public Guid Id { get; private set; }
         public string CompanyName { get; private set; }
@@ -21,10 +21,10 @@ namespace Administration.Domain.Sellers
         public string NIP { get; private set; }
 
         private Seller() { }
-        public Seller(string companyName, string street, string city, string postalCode, string bankName, 
+        public Seller(Guid id, string companyName, string street, string city, string postalCode, string bankName, 
             string bankAccountNumber, string bankSwift, string nip)
         {
-            Id = Guid.NewGuid();
+            Id = id;
             CompanyName = companyName;
             Street = street;
             City = city;

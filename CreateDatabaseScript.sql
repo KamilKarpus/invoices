@@ -44,7 +44,7 @@ create table RegisterCustomer(
 
 create table Customer(
 	ID uuid PRIMARY KEY,
-	ID_Organization uuid,
+	ID_Organization uuid REFERENCES CustomerOrganization(id),
 	Name varchar(100),
 	Surname varchar(100),
 	ModifyDate Date,

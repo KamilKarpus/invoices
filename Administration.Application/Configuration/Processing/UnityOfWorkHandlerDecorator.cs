@@ -20,7 +20,13 @@ namespace Administration.Application.Configuration.Processing
         public async Task<Unit> Handle(T request, CancellationToken cancellationToken)
         {
            await _decorated.Handle(request, cancellationToken);
-           await _unityOfWork.CommitAsync();
+            try
+            {
+                await _unityOfWork.CommitAsync();
+            }catch(Exception ex)
+            {
+
+            }
            return Unit.Value;
         }
     }

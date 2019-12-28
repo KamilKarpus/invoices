@@ -18,10 +18,12 @@ namespace Invoices.Controllers
             _module = module;
         }
         [HttpPost]
-        public IActionResult Index([FromBody]Seller.AddSeller seller)
+        public async Task<IActionResult> AddSeller([FromBody]Seller.AddSeller seller)
         {
-            _module.ExecuteCommand(new AddSellerCommand()
+            var sellerId = Guid.NewGuid();
+            await _module.ExecuteCommand(new AddSellerCommand()
             {
+                SellerId = sellerId,
                 BankAccountNumber = seller.BankAccountNumber,
                 BankName = seller.BankName,
                 BankSwift = seller.BankSwift,
@@ -31,7 +33,7 @@ namespace Invoices.Controllers
                 NIP = seller.NIP,
                 PostalCode = seller.PostalCode
             });
-            return Ok();
+            return Created($"api/seller/{sellerId}", new { Id = sellerId });
         }
     }
 }

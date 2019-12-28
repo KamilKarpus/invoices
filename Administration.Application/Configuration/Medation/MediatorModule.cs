@@ -7,6 +7,7 @@ using Administration.Application.Configuration.Processing;
 using Autofac;
 using Autofac.Core;
 using Autofac.Features.Variance;
+using Invoices.Common.DomainEvents;
 using MediatR;
 
 namespace Administration.Application.Configuration.Medation
@@ -24,7 +25,7 @@ namespace Administration.Application.Configuration.Medation
 
             var mediatorOpenTypes = new[]
             {
-                 typeof(IRequestHandler<,>),
+                 typeof(IRequestHandler<,>)
             };
 
             foreach (var mediatorOpenType in mediatorOpenTypes)

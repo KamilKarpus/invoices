@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\Invoices.Common\Invoices.Common.csproj" />
+    <ProjectReference Include="..\EventServiceBus\EventServiceBus.csproj" />
   </ItemGroup>
 
 </Project>
