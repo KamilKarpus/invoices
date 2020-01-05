@@ -26,6 +26,10 @@ namespace Administration.Application.Configuration.DataAccess
             .As<DbContext>()
             .InstancePerLifetimeScope();
 
+            builder.Register(r =>
+            new SqlConnectionFactory(_dbConnectionString))
+                .AsImplementedInterfaces();
+
             builder.RegisterType<PostgresChangeTracker>()
                 .AsImplementedInterfaces();
 

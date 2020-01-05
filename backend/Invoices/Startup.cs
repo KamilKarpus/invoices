@@ -35,6 +35,14 @@ namespace Invoices
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
+            services.AddCors(cfg =>
+            {
+                cfg.AddPolicy("CoreClient",
+                policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
         }
         public void ConfigureContainer(ContainerBuilder builder)
         {
@@ -62,6 +70,8 @@ namespace Invoices
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("CoreClient");
 
             app.UseEndpoints(endpoints =>
             {
