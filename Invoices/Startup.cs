@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Administration.Application.Configuration;
 using Autofac;
 using Invoices.Application.Configuration;
+using Invoices.Application.Configuration.Module;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +39,7 @@ namespace Invoices
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new AdministrationAutofacModule());
+            builder.RegisterModule(new InvoicesAutofacModule());
 
             AdministrationStartup.Initialize("Server=127.0.0.1;Port=5432;Database=invoices;User Id=invoices_user;Password=invoices;");
             InvoicesStartup.Initialize("Server=127.0.0.1;Port=5432;Database=invoices;User Id=invoices_user;Password=invoices;");

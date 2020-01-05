@@ -75,11 +75,16 @@ create table CustomerOrganization(
 );
 create table Product(
 	ID uuid PRIMARY KEY,
+	InvoiceId uuid,
 	Name varchar(100),
-	NetPrice decimal(2),
+	NetPerUnit decimal(9,2),
+	GrossPerUnit decimal(9,2),
+	NetPrice decimal(9,2),
 	VatRate int,
-	VatValue decimal(2),
-	GrossValue decimal(2)
+	VatValue decimal(9,2),
+	GrossValue decimal(9,2),
+	Currency varchar(100),
+	Quantity int
 );
 
 create table Invoice(
@@ -89,11 +94,14 @@ create table Invoice(
 	CreationDate Date,
 	SaleDate Date,
 	PaymentType varchar(100),
-	PaymentDeadline varchar(100),
-	ToPay decimal(2),
-	Paid decimal(2),
+	PaymentDeadline Date,
+	NetToPay decimal(9),
+	GrossToPay decimal(9),
+	Paid decimal(9),
 	LeftToPay decimal(2),
 	Remarks varchar(100),
 	Status int,
-	SellerId uuid
+	SellerId uuid,
+	Currency Varchar(100),
+	VatRate int
 );

@@ -13,14 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Administration.Application\Administration.Application.csproj" />
     <ProjectReference Include="..\Administration.IntegrationEvents\Adminstration.IntegrationEvents.csproj" />
     <ProjectReference Include="..\EventServiceBus\EventServiceBus.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Invoices.Domain\Invoices.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configuration\DataAccess\Repositories\" />
   </ItemGroup>
 
 </Project>

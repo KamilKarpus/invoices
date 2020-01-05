@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repo\" />
+    <ProjectReference Include="..\Invoices.Common\Domain.csproj" />
   </ItemGroup>
 
 </Project>

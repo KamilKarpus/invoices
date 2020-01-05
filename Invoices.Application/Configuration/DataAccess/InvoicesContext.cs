@@ -1,5 +1,6 @@
 ﻿using Invoices.Application.Configuration.DataAccess.EntityConfiguration;
 using Invoices.Domain;
+using Invoices.Domain.Invoices;
 using Invoices.Domain.RegisterOrganization;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,11 +17,13 @@ namespace Invoices.Application.Configuration.DataAccess
 
         public DbSet<RegisterSeller> Sellers { get; private set; }
         public DbSet<RegisterOrganization> Organizations { get; private set; }
+        public DbSet<Invoice> Invoices { get; private set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration<RegisterSeller>(new RegisterSellerEntityConfiguration());
             modelBuilder.ApplyConfiguration<RegisterOrganization>(new RegisterOrganizationEntityConfiguration());
+            modelBuilder.ApplyConfiguration<Invoice>(new InvoicesEntityConfiguration());
         }
     }
 }

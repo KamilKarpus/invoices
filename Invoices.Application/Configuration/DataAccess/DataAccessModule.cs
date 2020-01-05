@@ -27,9 +27,15 @@ namespace Invoices.Application.Configuration.DataAccess
               .As<DbContext>()
               .InstancePerLifetimeScope();
 
-            builder.RegisterType<RegisterSellerService>().AsSelf();
-            builder.RegisterType<RegisterOrganizationService>().AsSelf();
+            builder.RegisterType<RegisterSellerService>()
+                .AsSelf();
+            builder.RegisterType<RegisterOrganizationService>()
+                .AsSelf();
+            builder.RegisterType<UnityOfWork>()
+                .AsImplementedInterfaces();
 
+            builder.RegisterType<PostgresChangeTracker>()
+                .AsImplementedInterfaces();
             var invoicesAssembly = typeof(DataAccessModule).Assembly;
 
             builder.RegisterAssemblyTypes(invoicesAssembly)
