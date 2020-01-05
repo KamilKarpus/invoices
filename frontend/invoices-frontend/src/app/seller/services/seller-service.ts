@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { SellerShortInfo } from '../model/SellerShortInfo';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Seller } from '../model/seller';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,9 @@ export class SellerService {
   public getAllSellers() : Observable<SellerShortInfo[]> {
     var url = environment.apiUrl + this.baseUrl;
     return this.http.get<SellerShortInfo[]>(url);
+  }
+  public getSellerbyId(id) : Observable<Seller>{
+    var url = environment.apiUrl + this.baseUrl + '/'+id
+    return this.http.get<Seller>(url);
   }
 }

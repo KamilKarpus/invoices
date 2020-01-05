@@ -1,0 +1,13 @@
+.form {
+    width: 100%;
+    padding: 50px;
+    padding-right: 50px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  td {
+    padding-right: 8px;
+  }

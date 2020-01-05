@@ -26,6 +26,11 @@ namespace Invoices.QueryAPi
             var result = await _module.ExecuteQuery<IEnumerable<SellerShortInfo>>(new GetSellerShortInfoQuery());
             return Ok(result);
         }
-
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSeller(Guid id)
+        {
+            var result = await _module.ExecuteQuery<SellerReadModel>(new GetSellerInfoQuery() { SellerId = id});
+            return Ok(result);
+        }
     }
 }
