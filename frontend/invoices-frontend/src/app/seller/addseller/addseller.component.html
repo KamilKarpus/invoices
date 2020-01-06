@@ -1,0 +1,65 @@
+<div>
+    <form [formGroup]="sellerForm">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nazwa Firmy"  formControlName="companyNameControl">
+          <mat-error>
+           Nazwa Firmy jest <strong>wymagana!</strong>
+          </mat-error>
+        </mat-form-field>  
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Adress" formControlName="adressControl">
+            <mat-error>
+              Pole Adress jest <strong>wymagane!</strong>
+             </mat-error>
+          </mat-form-field>
+        </p>
+      
+        <table class="full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="full-width">
+            <input matInput placeholder="Miasto" formControlName="cityControl">
+            <mat-error>
+              Pole Miasto jest <strong>wymagane!</strong>
+             </mat-error>
+          </mat-form-field></td>
+          <td><mat-form-field class="full-width">
+            <input matInput #postalCode maxlength="6" placeholder="Kod Pocztowy" formControlName="postalCodeControl">
+            <mat-error>
+              Pole Kod Pocztowy jest <strong>wymagane!</strong>
+             </mat-error>
+            <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
+          </mat-form-field></td>
+        </tr></table>
+    
+        <mat-form-field class="full-width">
+            <input matInput #nip placeholder="Nip" formControlName="nipControl">
+            <mat-error>
+              Nip posiada <strong>{{banknumber.value.length}} /10 liczb!</strong>  
+             </mat-error>
+            <mat-hint align="end">{{nip.value.length}} / 10</mat-hint>
+          </mat-form-field>
+    
+            <mat-form-field class="full-width">
+            <input matInput #banknumber placeholder="Numer konta Bankowego" formControlName="numberControl">
+               <mat-error>
+                Numer konta bankowego posiada <strong>{{banknumber.value.length}} /26 liczb!</strong>  
+               </mat-error>
+               <mat-hint align="end">{{banknumber.value.length}} / 26</mat-hint>
+          </mat-form-field>
+          <table class="full-width" cellspacing="0"><tr>
+            <td><mat-form-field class="full-width">
+              <input matInput placeholder="Nazwa Banku" formControlName="bankName">
+              <mat-error>
+                Nazwa Banku jest <strong>wymagana!</strong>
+               </mat-error>
+            </mat-form-field></td>
+            <td><mat-form-field class="full-width">
+              <input matInput placeholder="Numer Swift" formControlName="switfControl">
+              <mat-error>
+                Pole Switf jest <strong>wymagane!</strong>
+               </mat-error>
+            </mat-form-field></td>
+          </tr></table>
+          <button button mat-raised-button color="primary" (click)="AddSeller()" >Dodaj sprzedawcę</button>
+      </form>
+    </div>

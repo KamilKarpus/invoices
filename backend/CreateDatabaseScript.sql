@@ -6,6 +6,7 @@ GRANT ALL PRIVILEGES ON DATABASE invoices TO invoices_user;
 create table RegisterSeller(
 	ID uuid PRIMARY KEY,
 	SellerID uuid,
+	CustomerName varchar(100),
 	CompanyName Varchar(100),
 	Street Varchar(100),
 	City Varchar(100),
@@ -21,7 +22,7 @@ create table RegisterSeller(
 create table Seller(
 	ID uuid PRIMARY KEY,
 	CompanyName Varchar(100),
-	Street Varchar(100),
+	Name varchar(100),
 	City Varchar(100),
 	PostalCode varchar(7),
 	BankName varchar(100),
@@ -71,6 +72,7 @@ create table CustomerOrganization(
 	PostalCode varchar(7),
 	Nip varchar(10),
 	ModifyDate Date,
+	CustomerName varchar(100),
 	Version int
 );
 create table Product(

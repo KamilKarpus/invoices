@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SellerService } from '../services/seller-service';
 import { ActivatedRoute } from '@angular/router';
 import { Seller } from '../model/seller';
@@ -8,20 +8,22 @@ import { Seller } from '../model/seller';
   templateUrl: './sellerinfo.component.html',
   styleUrls: ['./sellerinfo.component.css']
 })
-export class SellerinfoComponent implements OnInit {
-
-  private id;
+export class SellerinfoComponent implements OnInit, OnDestroy {
+  private sub;
   public seller : Seller;
   constructor(private service : SellerService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe(params => {
       this.service.getSellerbyId(params.id)
       .subscribe(data =>{
-        console.log(data);
         this.seller = data;
       });
    });
   }
-
+  ngOnDestroy(){
+    this.sub.unsubscribe();
+  }
 }
+
+

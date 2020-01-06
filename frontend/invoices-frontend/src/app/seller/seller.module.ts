@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
 import { SellerRoutes } from './seller.routing';
 import { SellerComponent } from './seller/seller.component';
 import { MaterialModule } from '../material/material-module';
@@ -9,19 +8,22 @@ import { SellersListComponent } from './sellers-list/sellers-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SellerService } from './services/seller-service';
 import { SellerinfoComponent } from './sellerinfo/sellerinfo.component';
+import { AddsellerComponent } from './addseller/addseller.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations:  [
-    HomeComponent, 
     SellerComponent, 
     MenuComponent, 
-    SellersListComponent, SellerinfoComponent
+    SellersListComponent, SellerinfoComponent, AddsellerComponent
   ],
   imports: [
     CommonModule,
     SellerRoutes,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers : [SellerService],
   bootstrap: [SellerComponent]

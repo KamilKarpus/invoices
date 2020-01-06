@@ -4,6 +4,7 @@ import { SellerShortInfo } from '../model/SellerShortInfo';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Seller } from '../model/seller';
+import { AddSeller } from '../model/addSeller';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,9 @@ export class SellerService {
   public getSellerbyId(id) : Observable<Seller>{
     var url = environment.apiUrl + this.baseUrl + '/'+id
     return this.http.get<Seller>(url);
+  }
+  public addSeller(seller : AddSeller) : Observable<any>{
+    var url = environment.apiUrl + this.baseUrl;
+    return this.http.post(url,seller);
   }
 }

@@ -1,5 +1,26 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span>Faktury</span>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Podręczne menu aplikacji">
+        <mat-icon>more_vert</mat-icon>
+        Faktury
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['home']">
+          <mat-icon>home</mat-icon>
+          <span>Strona Główna</span>
+        </button>
+        <button mat-menu-item [routerLink]="['seller/list']">
+          <mat-icon>person</mat-icon>
+          <span>Sprzedawcy</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>supervised_user_circle</mat-icon>
+          <span>Klienci</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>description</mat-icon>
+          <span>Faktury</span>
+        </button>
+      </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>

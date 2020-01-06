@@ -1,9 +1,9 @@
 import {RouterModule, Routes} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
-import { HomeComponent } from './home/home.component';
 import { SellerComponent } from './seller/seller.component';
 import { SellersListComponent } from './sellers-list/sellers-list.component';
 import { SellerinfoComponent } from './sellerinfo/sellerinfo.component';
+import { AddsellerComponent } from './addseller/addseller.component';
 
 const routes: Routes = [
     {
@@ -12,12 +12,12 @@ const routes: Routes = [
         children:
         [
         {
-            path: 'home',
-            component: HomeComponent,
-        },
-        {
             path: 'list',
             component : SellersListComponent
+        },
+        {
+            path: 'add',
+            component: AddsellerComponent
         },
         {
             path: ':id',
