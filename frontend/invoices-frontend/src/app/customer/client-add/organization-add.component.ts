@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { CustomerRoutes } from '../customer.routing';
-import { AddCustomer } from '../model/addcustomer';
+import { OrganizationService } from '../service/organization.service';
+import { AddOrganization } from '../model/addorganization';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-client-add',
-  templateUrl: './client-add.component.html',
-  styleUrls: ['./client-add.component.css']
+  selector: 'app-organization-add',
+  templateUrl: './organization-add.component.html',
+  styleUrls: ['./organization-add.component.css']
 })
-export class ClientAddComponent implements OnInit {
+export class OrganizationAddComponent implements OnInit {
 
   public customerForm : FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private service : OrganizationService,private router : Router, 
+    private toastr: ToastrService) {
     this. customerForm = this.fb.group({
       nameControl: new FormControl('',[Validators.required]),
       nipControl : new FormControl('',[Validators.required,Validators.minLength(10), Validators.maxLength(10)]),
@@ -31,8 +34,15 @@ export class ClientAddComponent implements OnInit {
       var postalCode = this.customerForm.get("postalCodeControl").value;
       var nip = this.customerForm.get("nipControl").value;
       var city = this.customerForm.get("cityControl").value;
-      var customer = new AddCustomer(name,adress,city,postalCode, nip);
-      console.log(customer);
+      var customer = new AddOrganization(name,adress,city,postalCode, nip);
+      this.service.addOrganization(customer).subscribe(
+        data=>{
+          this.toastr.success('Udało się dodać nowego klienta!', 'Sukces');
+          this.router.navigate(["/customer", data.id]);
+        }
+      );
+
+      
     }
   }
 

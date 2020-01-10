@@ -21,7 +21,6 @@ export class SellersListComponent implements OnInit {
       });
   }
   goToSeller(row){
-    console.log(row.id);
     this.router.navigate(["/seller", row.id]);
   }
 

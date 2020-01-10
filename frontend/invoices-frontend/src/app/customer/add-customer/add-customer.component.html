@@ -1,0 +1,13 @@
+<div>
+<form [formGroup]="formGroup">
+<table class="full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="full-width">
+      <input matInput placeholder="Imie" formControlName="name">
+    </mat-form-field></td>
+    <td><mat-form-field class="full-width">
+      <input matInput placeholder="Nazwisko" formControlName="surname">
+    </mat-form-field></td>
+  </tr></table>
+</form>
+<button mat-button color="primary" (click)="addCustomer()">Dodaj</button>
+</div>

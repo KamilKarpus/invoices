@@ -1,7 +1,10 @@
-import { ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomerComponent } from './customer/customer.component';
-import { ClientAddComponent } from './client-add/client-add.component';
+import { OrganizationListComponent } from './organization-list/organization-list.component';
+import { OrganizationInfoComponent } from './organization-info/organization-info.component';
+import { OrganizationAddComponent } from './client-add/organization-add.component';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
 const routes : Routes = [
     {
         path: '',
@@ -10,7 +13,19 @@ const routes : Routes = [
         [
             {
                 path: 'add',
-                component: ClientAddComponent
+                component: OrganizationAddComponent
+            },
+            {
+                path: 'list',
+                component: OrganizationListComponent
+            },
+            {
+                path: ':id',
+                component: OrganizationInfoComponent
+            },
+            {
+                path: ':id/add',
+                component : AddCustomerComponent
             }
         ]
     }

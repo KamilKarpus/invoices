@@ -7,14 +7,12 @@ namespace Invoices.Common.Entitys
 {
     public abstract class Entity
     {
-        public int Version { get; private set; }
         public DateTime ModifyDate {get; private set;}
 
         private readonly List<DomainEvent> _domainEvents;
 
         public Entity()
         {
-            Version = 0;
            _domainEvents = new List<DomainEvent>();
         }
 
@@ -30,7 +28,6 @@ namespace Invoices.Common.Entitys
         protected void AddDomainEvent(DomainEvent @event)
         {
             _domainEvents.Add(@event);
-            Version++;
             ModifyDate = DateTime.Now;
         }
     }

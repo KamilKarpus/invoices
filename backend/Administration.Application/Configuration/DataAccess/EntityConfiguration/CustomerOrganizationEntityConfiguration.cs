@@ -19,7 +19,6 @@ namespace Administration.Application.Configuration.DataAccess.EntityConfiguratio
             builder.Property(p => p.PostalCode).HasColumnName("postalcode");
             builder.Property(p => p.Street).HasColumnName("street");
             builder.Property(p => p.ModifyDate).HasColumnName("modifydate");
-            builder.Property(p => p.Version).HasColumnName("version");
             builder.Property(p => p.City).HasColumnName("city");
             builder.OwnsMany<Customer>("_customers", p =>
             {

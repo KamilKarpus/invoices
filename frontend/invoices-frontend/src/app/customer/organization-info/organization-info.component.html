@@ -1,0 +1,50 @@
+<div class="container" *ngIf="organization!=null">
+  <div class="button-container" >
+  <button mat-raised-button  [routerLink]="['add']">Dodaj Klienta do organizacji</button>
+  </div>
+    <form>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Klient" disabled value="{{organization.name}}">
+          <mat-error>
+           Nazwa Klienta jest <strong>wymagana!</strong>
+          </mat-error>
+        </mat-form-field>  
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Adress" disabled value="{{organization.street}}">
+            <mat-error>
+              Pole Adress jest <strong>wymagane!</strong>
+             </mat-error>
+          </mat-form-field>
+        </p>
+      
+        <table class="full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="full-width">
+            <input matInput placeholder="Miasto" disabled value="{{organization.city}}">
+            <mat-error>
+              Pole Miasto jest <strong>wymagane!</strong>
+             </mat-error>
+          </mat-form-field></td>
+          <td><mat-form-field class="full-width" disabled>
+            <input matInput #postalCode maxlength="6" placeholder="Kod Pocztowy" disabled value="{{organization.postalCode}}">
+            <mat-error>
+              Pole Kod Pocztowy jest <strong>wymagane!</strong>
+             </mat-error>
+            <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
+          </mat-form-field></td>
+        </tr></table>
+    
+        <mat-form-field class="full-width">
+            <input matInput #nip placeholder="Nip" maxlength="10" disabled value="{{organization.nip}}">
+            <mat-error>
+              Nip posiada <strong>{{nip.value.length}} /10 liczb!</strong>  
+             </mat-error>
+            <mat-hint align="end">{{nip.value.length}} / 10</mat-hint>
+          </mat-form-field>
+  
+      </form>
+      
+    <div *ngIf="organization != null" class="list-container">
+    <app-customer-list OrganizationId="{{organization.id}}"></app-customer-list>
+    </div>
+  </div>

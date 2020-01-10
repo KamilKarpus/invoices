@@ -15,7 +15,6 @@ create table RegisterSeller(
 	BankAccountNumber varchar(26),
 	Bankswift varchar(10),
 	ModifyDate Date,
-	Version int,
 	NIP varchar(10)
 );
 
@@ -29,7 +28,6 @@ create table Seller(
 	BankAccountNumber varchar(26),
 	Bankswift varchar(10),
 	ModifyDate Date,
-	Version int,
 	NIP varchar(10)
 );
 
@@ -39,8 +37,7 @@ create table RegisterCustomer(
 	ID_Organization uuid,
 	Name varchar(100),
 	Surname varchar(100),
-	ModifyDate Date,
-	Version int
+	ModifyDate Date
 );
 
 create table Customer(
@@ -48,8 +45,7 @@ create table Customer(
 	ID_Organization uuid REFERENCES CustomerOrganization(id),
 	Name varchar(100),
 	Surname varchar(100),
-	ModifyDate Date,
-	Version int
+	ModifyDate Date
 );
 
 create table RegisterCustomerOrganization(
@@ -60,8 +56,7 @@ create table RegisterCustomerOrganization(
 	City varchar(100),
 	PostalCode varchar(7),
 	Nip varchar(10),
-	ModifyDate Date,
-	Version int
+	ModifyDate Date
 );
 
 create table CustomerOrganization(
@@ -72,8 +67,7 @@ create table CustomerOrganization(
 	PostalCode varchar(7),
 	Nip varchar(10),
 	ModifyDate Date,
-	CustomerName varchar(100),
-	Version int
+	CustomerName varchar(100)
 );
 create table Product(
 	ID uuid PRIMARY KEY,

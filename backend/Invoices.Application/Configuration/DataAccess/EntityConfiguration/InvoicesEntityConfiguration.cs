@@ -50,7 +50,6 @@ namespace Invoices.Application.Configuration.DataAccess.EntityConfiguration
 
             builder.Property(p => p.SellerId).HasColumnName("sellerid");
             builder.Property(p => p.SaleDate).HasColumnName("saledate");
-            builder.Ignore(p => p.Version);
             builder.Ignore(p => p.ModifyDate);
             builder.Property(p => p.PaymentDeadline).HasColumnName("paymentdeadline");
             builder.Property(p => p.VatRate)
