@@ -9,7 +9,7 @@ namespace Invoices.Model
     {
         public class Add
         {
-            public Guid CustomerId { get;  set; }
+            public Guid CustomerId { get; set; }
             public Guid SellerId { get; set; }
             public string Currency { get; set; }
             public int VatRate { get; set; }
@@ -18,8 +18,16 @@ namespace Invoices.Model
         {
             public Guid InvoiceId { get; set; }
             public string Name { get; set; }
-            public decimal NetPrice { get; set; } 
+            public decimal NetPrice { get; set; }
             public int Quantity { get; set; }
+        }
+        public static class Get
+        {
+            public class GetPagginationInvoices
+            {
+                public int PageSize { get; set; }
+                public int CurrentPage { get; set; }
+            }
         }
     }
 }

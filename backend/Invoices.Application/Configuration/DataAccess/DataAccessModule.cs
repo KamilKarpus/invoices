@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Autofac;
+﻿using Autofac;
 using Infrastructure;
 using Invoices.Application.Services;
 using Microsoft.EntityFrameworkCore;
@@ -27,9 +24,16 @@ namespace Invoices.Application.Configuration.DataAccess
               .As<DbContext>()
               .InstancePerLifetimeScope();
 
+            builder.Register(r =>   
+                new SqlConnectionFactory(_dbConnectionString))
+            .AsImplementedInterfaces();
+
+
             builder.RegisterType<RegisterSellerService>()
                 .AsSelf();
             builder.RegisterType<RegisterOrganizationService>()
+                .AsSelf();
+            builder.RegisterType<RegisterCustomerService>()
                 .AsSelf();
             builder.RegisterType<UnityOfWork>()
                 .AsImplementedInterfaces();

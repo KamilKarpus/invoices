@@ -20,6 +20,7 @@ namespace Invoices.Application.Configuration.EventBus
                 var eventBus = scope.Resolve<IServiceBus>();
                 eventBus.Subscribe<SellerCreatedIntegrationEvent>(new InvoicesGenericIntegrationHandler<SellerCreatedIntegrationEvent>());
                 eventBus.Subscribe<OrganiationCreatedIntegrationEvent>(new InvoicesGenericIntegrationHandler<OrganiationCreatedIntegrationEvent>());
+                eventBus.Subscribe<AddCustomerIntegrationEvent>(new InvoicesGenericIntegrationHandler<AddCustomerIntegrationEvent>());
             }
         }
 

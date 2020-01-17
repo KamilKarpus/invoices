@@ -20,7 +20,7 @@ namespace Administration.Application.Commands.Handlers
         public async Task<Unit> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
         {
             var organization = await _repository.GetbyId(request.OrganizationId);
-            organization.AddCustomer(request.Name, request.Surname);
+            organization.AddCustomer(request.Id,request.Name, request.Surname);
             return Unit.Value;
 
         }

@@ -18,12 +18,13 @@ namespace Invoices.Application.Configuration.DataAccess
         public DbSet<RegisterSeller> Sellers { get; private set; }
         public DbSet<RegisterOrganization> Organizations { get; private set; }
         public DbSet<Invoice> Invoices { get; private set; }
-
+        public DbSet<RegisterCustomer> Customers { get; private set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration<RegisterSeller>(new RegisterSellerEntityConfiguration());
             modelBuilder.ApplyConfiguration<RegisterOrganization>(new RegisterOrganizationEntityConfiguration());
             modelBuilder.ApplyConfiguration<Invoice>(new InvoicesEntityConfiguration());
+            modelBuilder.ApplyConfiguration<RegisterCustomer>(new RegisterCustomerEntityConfiguration());
         }
     }
 }

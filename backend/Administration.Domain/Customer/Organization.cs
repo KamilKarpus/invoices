@@ -31,9 +31,8 @@ namespace Administration.Domain.Customers
             Nip = nip;
             AddDomainEvent(new OrganizationCreatedDomainEvent(id, name, street, city, postalcode, nip));
         }
-        public void AddCustomer(string name, string surname)
+        public void AddCustomer(Guid userid, string name, string surname)
         {
-            var userid = Guid.NewGuid();
             var customer = new Customer(userid, name, surname, Id);
             _customers.Add(customer);
             AddDomainEvent(new AddCustomerDomainEvent(userid, name, surname, Id));

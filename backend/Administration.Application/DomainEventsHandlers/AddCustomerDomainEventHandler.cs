@@ -18,7 +18,7 @@ namespace Administration.Application.DomainEventsHandlers
         }
         public Task Handle(AddCustomerDomainEvent @event)
         {
-            _bus.Publish(new AddCustomerIntegrationEvent(@event.Id, @event.Name, @event.LastName, @event.OrganizationId));
+            _bus.Publish(new AddCustomerIntegrationEvent(@event.CustomerId, @event.Name, @event.LastName, @event.OrganizationId));
            return Task.CompletedTask;
         }
     }
