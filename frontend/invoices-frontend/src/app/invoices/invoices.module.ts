@@ -4,6 +4,8 @@ import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoicesRoutes } from './invoices.routing';
 import { MaterialModule } from '../material/material-module';
+import { InvoicesService } from './services/invoices.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -12,8 +14,10 @@ import { MaterialModule } from '../material/material-module';
   imports: [
     CommonModule,
     InvoicesRoutes,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
-  bootstrap: [InvoiceComponent]
+  bootstrap: [InvoiceComponent],
+  providers : [InvoicesService]
 })
 export class InvoicesModule { }
