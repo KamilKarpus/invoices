@@ -1,8 +1,5 @@
 ﻿using Invoices.Application.Configuration.DataAccess;
 using Invoices.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Invoices.Application.Services

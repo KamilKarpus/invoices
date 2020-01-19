@@ -9,21 +9,23 @@ import { PagedList } from '../models/PagedList';
 })
 export class InvoicesListComponent implements OnInit {
 
-  length = 100;
+  length = 0;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  private list : PagedList;
+  displayedColumns: string[] = ['creationDate', 'leftToPay', 'status', 'name', 'surname'];
+  list : PagedList;
   constructor(private service : InvoicesService ) { }
 
   ngOnInit() {
     this.service.getInvoices(10,1)
-    .subscribe(data=>{this.list = data});
+    .subscribe(data=>{this.list = data;
+      this.length = data.totalItems;});
   }
   pageChanged(pageEvent){
-    console.log(JSON.stringify(pageEvent));
     var pageIndex =pageEvent.pageIndex+1;
     var pageSize =pageEvent.pageSize;
     this.service.getInvoices(pageSize,pageIndex)
-    .subscribe(data=>{this.list = data});
+    .subscribe(data=>{this.list = data,
+      this.length = data.totalItems});
   }
 }

@@ -19,7 +19,7 @@ namespace Administration.Application.Queries.Handler
         {
             var conn = _conn.GetConnection();
             var result = await conn.QuerySingleAsync<SellerReadModel>("SELECT id, companyname, street, city, postalcode,"
-                + "bankname, bankaccountnumber, bankswift, modifydate, version, nip" 
+                + "bankname, bankaccountnumber, bankswift, modifydate, nip" 
                 +" FROM public.seller where id=@Id;", new { Id = request.SellerId });
             return result;
         }

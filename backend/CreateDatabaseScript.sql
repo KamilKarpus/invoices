@@ -21,7 +21,7 @@ create table RegisterSeller(
 create table Seller(
 	ID uuid PRIMARY KEY,
 	CompanyName Varchar(100),
-	Name varchar(100),
+	Street varchar(100),
 	City Varchar(100),
 	PostalCode varchar(7),
 	BankName varchar(100),

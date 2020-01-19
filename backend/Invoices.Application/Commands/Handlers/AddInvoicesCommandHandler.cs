@@ -30,7 +30,7 @@ namespace Invoices.Application.Commands.Handlers
                 " limit 1;", new { Id = request.CustomerId });
 
             await _repository.AddAsync(new Invoice(request.Id, customerId.Id, request.SellerId,
-                request.Currency, DateTime.Now, request.VatRate)) ;
+                request.Currency, DateTime.Now, request.VatRate));
             return Unit.Value;
         }
     }

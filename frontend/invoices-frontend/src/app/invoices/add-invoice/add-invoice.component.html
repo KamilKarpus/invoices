@@ -1,0 +1,40 @@
+<div class="container">
+    <form>
+    <table class="full-width" cellspacing="0"><tr>
+        <td class="padding"><mat-form-field class="full-width">
+            <input type="text" #customerSearch (keyup)="onKey(customerSearch.value)" placeholder="Klienci" aria-label="Clients" matInput  [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of customerOptions" [value]="option.fullName">
+                {{option.name}} {{option.surname}}, {{option.organizationName}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <table class="full-width" cellspacing="0">
+            <td>
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Imie" disabled>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Nazwisko" disabled>
+                </mat-form-field>
+            </td>
+        </table>
+        </td>
+        <td class="padding">
+            <mat-form-field class="full-width">
+            <input type="text" #sellerSearch (keyup)="onKeySeller(sellerSearch.value)" placeholder="Sprzedawcy" aria-label="Selers" matInput  [matAutocomplete]="seller">
+            <mat-autocomplete #seller="matAutocomplete">
+              <mat-option *ngFor="let option of sellerOptions" [value]="option.companyName" >
+                {{option.companyName}}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Imie" disabled>
+            </mat-form-field>
+        </td>
+      </tr></table>
+    </form>
+</div>

@@ -32,5 +32,15 @@ namespace Invoices.QueryAPi
             var result = await _module.ExecuteQuery<SellerReadModel>(new GetSellerInfoQuery() { SellerId = id});
             return Ok(result);
         }
+        [HttpGet("name")]
+        [ProducesResponseType(typeof(IEnumerable<SellerCompanyName>),200)]
+        public async Task<IActionResult> GetSellerbyCompanyName([FromQuery]string companyName)
+        {
+            var result = await _module.ExecuteQuery<IEnumerable<SellerCompanyName>>(new GetSellerbyCompanyNameQuery()
+            {
+                CompanyName = companyName
+            });
+            return Ok(result);
+        }
     }
 }

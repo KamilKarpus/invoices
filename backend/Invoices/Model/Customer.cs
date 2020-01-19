@@ -13,5 +13,12 @@ namespace Invoices.Model
             public string Surname { get; set; }
             public Guid OrganizationId { get; set; }
         }
+        public static class Get
+        {
+            public class GetbyFullName
+            {
+                public string FullName { get; set; }
+            }
+        }
     }
 }
