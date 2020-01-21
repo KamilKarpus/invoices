@@ -1,40 +1,54 @@
 <div class="container">
-    <form>
+    <form [formGroup]="formGroup">
     <table class="full-width" cellspacing="0"><tr>
         <td class="padding"><mat-form-field class="full-width">
-            <input type="text" #customerSearch (keyup)="onKey(customerSearch.value)" placeholder="Klienci" aria-label="Clients" matInput  [matAutocomplete]="auto">
+            <input type="text" #customerSearch (keyup)="onKey(customerSearch.value)" formControlName="customer" placeholder="Klienci" aria-label="Clients" matInput  [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of customerOptions" [value]="option.fullName">
+              <mat-option *ngFor="let option of customerOptions" [value]="option.fullName" (click)="setCustomer(option)">
                 {{option.name}} {{option.surname}}, {{option.organizationName}}
               </mat-option>
             </mat-autocomplete>
+            <mat-error>
+              Pole klienta jest <strong>wymagane!</strong>  
+             </mat-error>
           </mat-form-field>
           <table class="full-width" cellspacing="0">
             <td>
                 <mat-form-field class="full-width">
-                  <input matInput placeholder="Imie" disabled>
+                  <input matInput placeholder="Imie" [value]="pickedCustomer?.name" disabled>
                 </mat-form-field>
             </td>
             <td>
                 <mat-form-field class="full-width">
-                  <input matInput placeholder="Nazwisko" disabled>
+                  <input matInput placeholder="Nazwisko" [value]="pickedCustomer?.surname" disabled>
                 </mat-form-field>
             </td>
         </table>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nazwa Organizacji" [value]="pickedCustomer?.organizationName" disabled> 
+        </mat-form-field>
         </td>
         <td class="padding">
             <mat-form-field class="full-width">
-            <input type="text" #sellerSearch (keyup)="onKeySeller(sellerSearch.value)" placeholder="Sprzedawcy" aria-label="Selers" matInput  [matAutocomplete]="seller">
+            <input type="text" #sellerSearch (keyup)="onKeySeller(sellerSearch.value)" formControlName="seller" placeholder="Sprzedawcy" aria-label="Selers" matInput  [matAutocomplete]="seller">
             <mat-autocomplete #seller="matAutocomplete">
-              <mat-option *ngFor="let option of sellerOptions" [value]="option.companyName" >
+              <mat-option *ngFor="let option of sellerOptions" [value]="option.companyName" (click)="setSeller(option)">
                 {{option.companyName}}
               </mat-option>
             </mat-autocomplete>
+            <mat-error>
+              Pole sprzedawcy jest <strong>wymagane!</strong>  
+             </mat-error>
         </mat-form-field>
             <mat-form-field class="full-width">
-                <input matInput placeholder="Imie" disabled>
+                <input matInput placeholder="Nazwa" [value]="pickedSeller?.companyName" disabled>
             </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Przedstawiciel" disabled>
+          </mat-form-field>
         </td>
-      </tr></table>
-    </form>
+      </tr>
+    </table>
+    <button mat-raised-button color="primary" (click)="submit()">Utwórz fakturę</button>
+  </form>
 </div>

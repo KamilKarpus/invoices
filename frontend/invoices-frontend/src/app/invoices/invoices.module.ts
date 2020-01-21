@@ -10,6 +10,7 @@ import { AddInvoiceComponent } from './add-invoice/add-invoice.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CustomerService } from './services/customer.service';
 import { SellerService } from './services/seller.service';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 
@@ -26,6 +27,7 @@ import { SellerService } from './services/seller.service';
   bootstrap: [InvoiceComponent],
   providers : [InvoicesService, 
               CustomerService,
-              SellerService]
+              SellerService,
+              {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'}]
 })
 export class InvoicesModule { }

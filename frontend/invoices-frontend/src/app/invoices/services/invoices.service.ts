@@ -3,6 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PagedList } from '../models/PagedList';
 import { environment } from 'src/environments/environment';
+import { InvoiceAdd } from '../models/invoices-add';
+
 
 
 @Injectable({
@@ -19,6 +21,10 @@ export class InvoicesService{
             PageSize : pageSize,
             CurrentPage: currentPage
         }});
+    }
+    public addInvoices(invoices : InvoiceAdd) : Observable<any>{
+        var url = environment.apiUrl + this.baseUrl;
+        return this.http.post<any>(url, invoices);
     }
   
 }
