@@ -3,6 +3,7 @@ using Administration.Application.Queries;
 using Administration.Application.ReadModels.Customer;
 using Invoices.Model;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,9 +19,9 @@ namespace Invoices.QueryAPi
         {
             _module = module;
         }
-       
+
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<CustomerNameView>),200)]
+        [ProducesResponseType(typeof(IEnumerable<CustomerNameView>), 200)]
         public async Task<IActionResult> GetbyFullName([FromQuery]string fullName)
         {
             var result = await _module.ExecuteQuery<IEnumerable<CustomerNameView>>(new GetCustomerbyNameQuery()
@@ -28,6 +29,17 @@ namespace Invoices.QueryAPi
                 FullName = fullName
             });
             return Ok(result);
+        }
+        [HttpGet("{id}/organization")]
+        [ProducesResponseType(typeof(CustomerOrganizationView), 200)]
+        public async Task<IActionResult> GetCustomerWithOrganization(Guid id)
+        {
+            var result = await _module.ExecuteQuery<CustomerOrganizationView>(new GetCustomerWithOrganizationbyIdQuery()
+            {
+                CustomerId = id
+            });
+            return Ok(result);
+
         }
     }
 }
