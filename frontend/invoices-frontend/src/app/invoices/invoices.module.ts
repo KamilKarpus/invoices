@@ -11,11 +11,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CustomerService } from './services/customer.service';
 import { SellerService } from './services/seller.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MenuComponent } from './menu/menu.component';
 
 
 
 @NgModule({
-  declarations: [InvoicesListComponent, InvoiceComponent, AddInvoiceComponent],
+  declarations: [InvoicesListComponent, InvoiceComponent, AddInvoiceComponent, MenuComponent],
   imports: [
     CommonModule,
     InvoicesRoutes,
