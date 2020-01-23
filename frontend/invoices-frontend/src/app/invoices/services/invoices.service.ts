@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { PagedList } from '../models/PagedList';
 import { environment } from 'src/environments/environment';
 import { InvoiceAdd } from '../models/invoices-add';
+import { InvoicesView } from '../models/InvoicesShortView';
+import { InvoicesInfoView } from '../models/invoices-view';
 
 
 
@@ -25,6 +27,10 @@ export class InvoicesService{
     public addInvoices(invoices : InvoiceAdd) : Observable<any>{
         var url = environment.apiUrl + this.baseUrl;
         return this.http.post<any>(url, invoices);
+    }
+    public getInvoice(id : string) : Observable<InvoicesInfoView>{
+        var url = `${environment.apiUrl}${this.baseUrl}/${id}`;
+        return this.http.get<InvoicesInfoView>(url);
     }
   
 }

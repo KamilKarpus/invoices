@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Administration.Application.Configuration;
 using Administration.Application.Queries;
 using Administration.Application.ReadModels;
+using Administration.Application.ReadModels.Seller;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,16 @@ namespace Invoices.QueryAPi
             var result = await _module.ExecuteQuery<IEnumerable<SellerCompanyName>>(new GetSellerbyCompanyNameQuery()
             {
                 CompanyName = companyName
+            });
+            return Ok(result);
+        }
+        [HttpGet("{id}/register")]
+        [ProducesResponseType(typeof(RegisterSellerView), 200)]
+        public async Task<IActionResult> GetRegisterSellerbyId(Guid id)
+        {
+            var result = await _module.ExecuteQuery<RegisterSellerView>(new GetRegisterSellerbyIdQuery()
+            {
+                Id = id
             });
             return Ok(result);
         }

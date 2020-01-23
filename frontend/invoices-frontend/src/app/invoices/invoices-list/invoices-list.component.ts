@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InvoicesService } from '../services/invoices.service';
 import { PagedList } from '../models/PagedList';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoices-list',
@@ -14,7 +15,7 @@ export class InvoicesListComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   displayedColumns: string[] = ['creationDate', 'leftToPay', 'status', 'name', 'surname'];
   list : PagedList;
-  constructor(private service : InvoicesService ) { }
+  constructor(private service : InvoicesService, private router: Router  ) { }
 
   ngOnInit() {
     this.service.getInvoices(10,1)
@@ -27,5 +28,9 @@ export class InvoicesListComponent implements OnInit {
     this.service.getInvoices(pageSize,pageIndex)
     .subscribe(data=>{this.list = data,
       this.length = data.totalItems});
+  }
+
+  goToInvoice(row){
+    this.router.navigate(["/invoices", row.id]);
   }
 }

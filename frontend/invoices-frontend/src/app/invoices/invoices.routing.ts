@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { AddInvoiceComponent } from './add-invoice/add-invoice.component';
+import { InvoicesInfoComponent } from './invoices-info/invoices-info.component';
 
 const routes : Routes = [
     {
@@ -17,6 +18,10 @@ const routes : Routes = [
             {
                 path: 'add',
                 component: AddInvoiceComponent
+            },
+            {
+                path: ':id',
+                component: InvoicesInfoComponent
             }
         ]
     }

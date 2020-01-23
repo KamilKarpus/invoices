@@ -2,7 +2,9 @@
 using Invoices.Application.Configuration.Module;
 using Invoices.Application.Queries;
 using Invoices.Application.ReadModels;
+using Invoices.Application.ReadModels.Product;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 using static Invoices.Model.Invoice;
 
@@ -20,10 +22,30 @@ namespace Invoices.QueryAPi
         [HttpGet]
         public async Task<IActionResult> GetInvoices([FromQuery]Get.GetPagginationInvoices request)
         {
-            var result = await _module.ExecuteQuery<PagedList<InvoicesShortView>>(new GetManyInvoicesQuery() 
+            var result = await _module.ExecuteQuery<PagedList<InvoicesShortView>>(new GetManyInvoicesQuery()
             {
                 CurrentPage = request.CurrentPage,
                 PageSize = request.PageSize
+            });
+            return Ok(result);
+        }
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(InvoicesView),200)]
+        public async Task<IActionResult> GetInvoicesbyId(Guid id)
+        {
+            var result = await _module.ExecuteQuery<InvoicesView>(new GetInvoicesDetailsQuery()
+            {
+                Id = id
+            });
+            return Ok(result);
+        }
+        [HttpGet("{id}/products")]
+        [ProducesResponseType(typeof(ProductPagedList), 200)]
+        public async Task<IActionResult> GetProduct(Guid id)
+        {
+            var result = await _module.ExecuteQuery<ProductPagedList>(new GetProductsbyInvoiceIdQuery
+            {
+                InvoiceId = id
             });
             return Ok(result);
         }

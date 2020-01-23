@@ -29,7 +29,14 @@ namespace Invoices.Application.Commands.Handlers
                 " order by modifydate" +
                 " limit 1;", new { Id = request.CustomerId });
 
-            await _repository.AddAsync(new Invoice(request.Id, customerId.Id, request.SellerId,
+            var sellerId = await conn.QuerySingleAsync<SellerId>(
+                "SELECT id"
+                + " FROM public.registerseller"
+                + " where sellerid = @Id"
+                + " order by modifydate"
+                + " limit 1;", new { Id = request.SellerId });
+
+            await _repository.AddAsync(new Invoice(request.Id, customerId.Id, sellerId.Id,
                 request.Currency, DateTime.Now, request.VatRate));
             return Unit.Value;
         }

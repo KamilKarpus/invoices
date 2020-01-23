@@ -12,11 +12,12 @@ import { CustomerService } from './services/customer.service';
 import { SellerService } from './services/seller.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MenuComponent } from './menu/menu.component';
+import { InvoicesInfoComponent } from './invoices-info/invoices-info.component';
 
 
 
 @NgModule({
-  declarations: [InvoicesListComponent, InvoiceComponent, AddInvoiceComponent, MenuComponent],
+  declarations: [InvoicesListComponent, InvoiceComponent, AddInvoiceComponent, MenuComponent, InvoicesInfoComponent],
   imports: [
     CommonModule,
     InvoicesRoutes,

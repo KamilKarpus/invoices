@@ -15,7 +15,7 @@ namespace Administration.Application.DomainEventsHandlers
         }
         public Task Handle(SellerCreatedDomainEvent @event)
         {
-            _bus.Publish(new SellerCreatedIntegrationEvent(@event.Id,@event.CompanyName,
+            _bus.Publish(new SellerCreatedIntegrationEvent(@event.SellerId,@event.CompanyName,
                 @event.Street,@event.City,@event.PostalCode,@event.BankName,
                 @event.BankAcountNumber,@event.BankSwift,@event.NIP));
             return Task.CompletedTask;

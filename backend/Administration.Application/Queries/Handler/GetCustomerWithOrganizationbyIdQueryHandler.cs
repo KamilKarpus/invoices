@@ -18,10 +18,11 @@ namespace Administration.Application.Queries.Handler
         {
             var conn = _factory.GetConnection();
             var result = await conn.QuerySingleAsync<CustomerOrganizationView>(
-                "SELECT c.id, c.name, c.surname, o.name as OrganizationName, o.id as OrganizationId"
-                + " FROM public.customer c"
-                + " join customerorganization o on c.id_organization = o.id"
-                + " where c.id = @Id", new { Id = request.CustomerId });
+                "SELECT c.id, c.name, c.surname, o.name as OrganizationName, o.id as OrganizationId, o.street as Adress"
+                + " ,o.city as City, o.PostalCode as PostalCode, o.nip as Nip"
+                + " FROM public.registercustomer c"
+                + " join registercustomerorganization o on c.id_organization = o.id"
+                + " where c.Id = @Id", new { Id = request.CustomerId });
             return result;
         }
     }
