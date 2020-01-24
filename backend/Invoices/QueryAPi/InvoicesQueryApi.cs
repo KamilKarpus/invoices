@@ -3,6 +3,7 @@ using Invoices.Application.Configuration.Module;
 using Invoices.Application.Queries;
 using Invoices.Application.ReadModels;
 using Invoices.Application.ReadModels.Product;
+using Invoices.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace Invoices.QueryAPi
             _module = module;
         }
         [HttpGet]
-        public async Task<IActionResult> GetInvoices([FromQuery]Get.GetPagginationInvoices request)
+        public async Task<IActionResult> GetInvoices([FromQuery]Get.GetPaggination request)
         {
             var result = await _module.ExecuteQuery<PagedList<InvoicesShortView>>(new GetManyInvoicesQuery()
             {
@@ -41,11 +42,13 @@ namespace Invoices.QueryAPi
         }
         [HttpGet("{id}/products")]
         [ProducesResponseType(typeof(ProductPagedList), 200)]
-        public async Task<IActionResult> GetProduct(Guid id)
+        public async Task<IActionResult> GetProduct(Guid id, [FromQuery]Invoice.Get.GetPaggination paggination)
         {
             var result = await _module.ExecuteQuery<ProductPagedList>(new GetProductsbyInvoiceIdQuery
             {
-                InvoiceId = id
+                InvoiceId = id,
+                PageSize = paggination.PageSize,
+                CurrentPage = paggination.CurrentPage
             });
             return Ok(result);
         }

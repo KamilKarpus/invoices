@@ -29,7 +29,7 @@ namespace Invoices.Controllers
         public async Task<IActionResult> AddProduct([FromBody]Invoice.AddProduct add)
         {
             Guid id = Guid.NewGuid();
-            await _module.ExecuteCommand(new AddProductCommand(id, add.InvoiceId, add.Name, add.NetPrice, add.Quantity));
+            await _module.ExecuteCommand(new AddProductCommand(id, add.InvoiceId, add.Name, decimal.Parse(add.NetPrice), int.Parse(add.Quantity)));
             return Created($"api/invoices/product/{id}", new { Id = id });
 
         }

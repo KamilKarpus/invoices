@@ -33,7 +33,7 @@ namespace Invoices.Application.Queries.Handlers
                 Name = p.Name
             }).AsQueryable();
             var invoice = result.FirstOrDefault();
-            return new ProductPagedList(invoice.Id, invoice.Nettopay, invoice.Grosstopay, products, 10, 1, p => p.Grossperunit.ToString());
+            return new ProductPagedList(invoice.Id, invoice.Nettopay, invoice.Grosstopay, products, request.PageSize, request.CurrentPage, p => p.Grossperunit.ToString());
 
         }
     }
