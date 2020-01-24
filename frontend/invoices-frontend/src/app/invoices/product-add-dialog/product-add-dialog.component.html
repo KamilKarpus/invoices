@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Dodaj Produkt</h1>
+<form [formGroup]="productForm">
+<div mat-dialog-content>
+  <table class="full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="full-width">
+      <input matInput placeholder="Nazwa" formControlName="name">
+      <mat-error>Pole jest wymagane!</mat-error>
+    </mat-form-field></td>
+    <td><mat-form-field class="full-width">
+      <input matInput placeholder="Cen Netto za jednostkę"  formControlName="price">
+      <mat-error>Pole jest wymagane!</mat-error>
+    </mat-form-field></td>
+    <td><mat-form-field class="full-width">
+      <input matInput placeholder="Ilość"  formControlName="quantity">
+      <mat-error>Pole jest wymagane!</mat-error>
+    </mat-form-field></td>
+  </tr></table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-button (click)="onYesClick()" cdkFocusInitial>Zapisz</button>
+</div>
+</form>

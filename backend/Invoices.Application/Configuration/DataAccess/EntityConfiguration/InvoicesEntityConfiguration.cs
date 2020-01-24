@@ -23,7 +23,6 @@ namespace Invoices.Application.Configuration.DataAccess.EntityConfiguration
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Id).HasColumnName("id");
             builder.Property(p => p.CustomerId).HasColumnName("customerid");
-            builder.Property(p => p.Number).HasColumnName("number");
             builder.Property(p => p.CreationDate).HasColumnName("creationdate");
 
             builder.OwnsOne(p => p.GrossToPay, b =>
@@ -44,6 +43,12 @@ namespace Invoices.Application.Configuration.DataAccess.EntityConfiguration
                 b.Property(p => p.Value).HasColumnName("paid");
             });
 
+            builder.OwnsOne(p => p.Number, b =>
+            {
+                b.Property(p => p.Number).HasColumnName("number");
+                b.Property(p => p.Year).HasColumnName("numberyear");
+            });
+
             builder.Property(p => p.Status)
                 .HasColumnName("status")
                 .HasConversion(converter);
@@ -55,6 +60,7 @@ namespace Invoices.Application.Configuration.DataAccess.EntityConfiguration
             builder.Property(p => p.VatRate)
                 .HasColumnName("vatrate")
                 .HasConversion(percentage);
+
 
             builder.OwnsMany<Product>("_products", p =>
             {

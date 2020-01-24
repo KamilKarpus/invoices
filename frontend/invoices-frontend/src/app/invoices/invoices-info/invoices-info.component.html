@@ -1,4 +1,9 @@
 <form class="form">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <span><button mat-flat-button color (click)="openDialog()">Dodaj produkt</button></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
 <table class="full-width" cellspacing="0"><tr>
     <td class="td">
         <mat-toolbar>
@@ -44,39 +49,42 @@
         </mat-form-field>
     </td>
   </tr></table>
+<div *ngIf="products!=null">
+  <mat-toolbar>Produkty</mat-toolbar>
 
-
-  <table mat-table [dataSource]="products" class="full-width">
+  <table mat-table [dataSource]="products.items" class="full-width">
     <ng-container matColumnDef="product">
       <th mat-header-cell *matHeaderCellDef> Produkt</th>
-      <td mat-cell *matCellDef="let product"> {{transaction.item}}  </td>
+      <td mat-cell *matCellDef="let product"> {{product.name}}  </td>
       <td mat-footer-cell *matFooterCellDef> Suma </td>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef> Cena Netto</th>
-      <td mat-cell *matCellDef="let product"> {{transaction.cost | currency}} </td>
-      <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+      <th mat-header-cell *matHeaderCellDef> Ilość</th>
+      <td mat-cell *matCellDef="let product"> {{product.quantity}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
     </ng-container>
     
     <ng-container matColumnDef="net">
       <th mat-header-cell *matHeaderCellDef> Cena Netto</th>
-      <td mat-cell *matCellDef="let product"> {{transaction.cost | currency}} </td>
-      <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+      <td mat-cell *matCellDef="let product"> {{product.netperunit | currency:" ":"symbol":"4.2-2"}} PLN</td>
+      <td mat-footer-cell *matFooterCellDef> {{products.netToPay | currency:" ":"symbol":"4.2-2"}} PLN </td>
     </ng-container>
   
     <ng-container matColumnDef="gross">
       <th mat-header-cell *matHeaderCellDef> Cena Brutto </th>
-      <td mat-cell *matCellDef="let product"> {{transaction.cost | currency}} </td>
-      <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+      <td mat-cell *matCellDef="let product"> {{product.grossperunit | currency:" ":"symbol":"4.2-2"}} PLN </td>
+      <td mat-footer-cell *matFooterCellDef> {{products.grossToPay |currency:" ":"symbol":"4.2-2"}} PLN </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
   </table>
-
-
-
-
+  <mat-paginator [length]="products.totalItems"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="pageChanged($event)">
+</mat-paginator>
+</div>
 </form>

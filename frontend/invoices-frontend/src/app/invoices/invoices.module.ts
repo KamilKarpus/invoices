@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { InvoiceComponent } from './invoice/invoice.component';
@@ -13,11 +13,12 @@ import { SellerService } from './services/seller.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MenuComponent } from './menu/menu.component';
 import { InvoicesInfoComponent } from './invoices-info/invoices-info.component';
+import { ProductAddDialogComponent } from './product-add-dialog/product-add-dialog.component';
 
 
 
 @NgModule({
-  declarations: [InvoicesListComponent, InvoiceComponent, AddInvoiceComponent, MenuComponent, InvoicesInfoComponent],
+  declarations: [InvoicesListComponent, InvoiceComponent, AddInvoiceComponent, MenuComponent, InvoicesInfoComponent, ProductAddDialogComponent],
   imports: [
     CommonModule,
     InvoicesRoutes,
@@ -26,10 +27,12 @@ import { InvoicesInfoComponent } from './invoices-info/invoices-info.component';
     ReactiveFormsModule,
     FormsModule
   ],
+  entryComponents:[ProductAddDialogComponent],
   bootstrap: [InvoiceComponent],
   providers : [InvoicesService, 
               CustomerService,
               SellerService,
-              {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'}]
+              {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'}
+            ]
 })
 export class InvoicesModule { }

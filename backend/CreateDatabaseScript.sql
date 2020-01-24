@@ -42,7 +42,7 @@ create table RegisterCustomer(
 
 create table Customer(
 	ID uuid PRIMARY KEY,
-	ID_Organization uuid REFERENCES CustomerOrganization(id),
+	ID_Organization uuid,
 	Name varchar(100),
 	Surname varchar(100),
 	ModifyDate Date
@@ -67,7 +67,6 @@ create table CustomerOrganization(
 	PostalCode varchar(7),
 	Nip varchar(10),
 	ModifyDate Date,
-	CustomerName varchar(100)
 );
 create table Product(
 	ID uuid PRIMARY KEY,
@@ -87,6 +86,7 @@ create table Invoice(
 	ID uuid Primary key,
 	CustomerID uuid,
 	Number int,
+	NumberYear int,
 	CreationDate Date,
 	SaleDate Date,
 	PaymentType varchar(100),

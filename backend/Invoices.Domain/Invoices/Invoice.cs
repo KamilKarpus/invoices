@@ -16,7 +16,7 @@ namespace Invoices.Domain.Invoices
         public Guid Id { get; private set; }
         public Guid CustomerId { get; private set; }
         public DateTime CreationDate { get; private set; }
-        public int Number { get; private set; }
+        public InvoicesNumber Number { get; private set; }
         public DateTime SaleDate { get; private set; }
 
         public DateTime PaymentDeadline { get; private set; }
