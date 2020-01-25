@@ -9,8 +9,12 @@ import { SellerShortView } from '../models/seller/sellershortview';
 import { ProductPagedList } from '../models/product/productpagedlist';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductAddDialogComponent } from '../product-add-dialog/product-add-dialog.component';
-import { ProductAdd } from '../models/product/product-add-model';
+import { ProductDTO } from '../models/product/product-add-model';
 import { Product } from '../models/product/product-model';
+import { ProductUpdate } from '../models/product/product-update-model';
+import { SelectionModel } from '@angular/cdk/collections';
+import { ToastrService } from 'ngx-toastr';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-invoices-info',
@@ -25,10 +29,13 @@ export class InvoicesInfoComponent implements OnInit {
   public sellerInfo : SellerShortView;
   public products : ProductPagedList;
   private flag : boolean = true;
-  public displayedColumns: string[] = ['product', 'quantity','net', 'gross'];
+  public displayedColumns: string[] = ['product', 'quantity','net', 'gross', 'action'];
+
+
+
   constructor(private invoiceService : InvoicesService, private route : ActivatedRoute,
       private customerService : CustomerService, private sellerService : SellerService,
-      public dialog: MatDialog) { }
+      public dialog: MatDialog, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -79,10 +86,11 @@ export class InvoicesInfoComponent implements OnInit {
   openDialogAdd(result){
     this.flag = true;
     if(result != null){
-      var productToAdd = new ProductAdd(this.InvoiceView.id, result.productData.name, result.productData.netPrice, result.productData.quantity);
+      var productToAdd = new ProductDTO(this.InvoiceView.id, result.productData.name, result.productData.netPrice, result.productData.quantity);
       this.invoiceService.addProduct(productToAdd)
       .subscribe(data=>{
         this.getProductInfo(this.InvoiceView.id);
+        this.toastr.success('Udało się dodać nowy produkt do faktury!', 'Sukces');
       })
     }
   }
@@ -94,4 +102,35 @@ export class InvoicesInfoComponent implements OnInit {
       this.openDialogAdd(result);
     });
   }
+  editDialog(product){
+    this.flag = false;
+    const dialogRef = this.dialog.open(ProductAddDialogComponent,
+      {data : {name: product.name,netPrice : product.netperunit, quantity : product.quantity}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.flag = true;
+    if(result != null){
+      var productToUpdate = new ProductUpdate(product.productId, result.productData.netPrice, result.productData.quantity,result.productData.name);
+      this.invoiceService.updateProduct(this.InvoiceView.id, productToUpdate).subscribe(data=>{
+        this.getProductInfo(this.InvoiceView.id);
+        this.toastr.success(`Udało się zaktualizować produkt ${productToUpdate.name}!`, 'Sukces');
+      });
+      }
+    });
+  }
+  deleteProduct(product){
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent,
+      {data: {title: 'Usuń przedmiot',content: `Czy chcesz usunać przedmiot o nazwie ${product.name}`}});
+
+      dialogRef.afterClosed().subscribe(result => {
+        if(result.confirmation === true){
+            this.invoiceService.deleteProduct(this.InvoiceView.id, product.productId)
+            .subscribe(data=>{
+              this.getProductInfo(this.InvoiceView.id);
+              this.toastr.success(`Produkt został usunięty ${product.name}!`, 'Sukces');
+            });
+        }
+      });
+  }
+
 } 

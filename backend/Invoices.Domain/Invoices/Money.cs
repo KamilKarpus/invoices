@@ -19,7 +19,7 @@ namespace Invoices.Domain.Invoices
             yield return Value;
             yield return Currency;
         }
-
+        public static Money Zero(string currency) => new Money(0, currency);
         public static Money operator +(Money a, Money b)
         {
             if (a.Currency != b.Currency)

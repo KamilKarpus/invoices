@@ -18,8 +18,8 @@ namespace Invoices.Model
         {
             public Guid InvoiceId { get; set; }
             public string Name { get; set; }
-            public string NetPrice { get; set; }
-            public string Quantity { get; set; }
+            public  decimal NetPrice { get; set; }
+            public int Quantity { get; set; }
         }
         public static class Get
         {
@@ -27,6 +27,16 @@ namespace Invoices.Model
             {
                 public int PageSize { get; set; }
                 public int CurrentPage { get; set; }
+            }
+        }
+        public static class Update
+        {
+            public class Product
+            {
+                public Guid ProductId { get; set; }
+                public decimal NetPrice { get; set; }
+                public int Quantity { get; set; }
+                public string Name { get; set; }
             }
         }
     }

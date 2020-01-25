@@ -21,7 +21,7 @@ namespace Invoices.Controllers
         public async Task<IActionResult> Post([FromBody]Invoice.Add add)
         {
             Guid id = Guid.NewGuid();
-            await _module.ExecuteCommand(new AddInvoicesCommand(id,add.CustomerId,add.SellerId,add.Currency, add.VatRate));
+            await _module.ExecuteCommand(new AddInvoicesCommand(id, add.CustomerId, add.SellerId, add.Currency, add.VatRate));
             return Created($"api/invoices/{id}", new { Id = id });
         }
         [HttpPost]
@@ -29,9 +29,32 @@ namespace Invoices.Controllers
         public async Task<IActionResult> AddProduct([FromBody]Invoice.AddProduct add)
         {
             Guid id = Guid.NewGuid();
-            await _module.ExecuteCommand(new AddProductCommand(id, add.InvoiceId, add.Name, decimal.Parse(add.NetPrice), int.Parse(add.Quantity)));
+            await _module.ExecuteCommand(new AddProductCommand(id, add.InvoiceId, add.Name, add.NetPrice, add.Quantity));
             return Created($"api/invoices/product/{id}", new { Id = id });
 
+        }
+        [HttpPut("{id}/products")]
+        public async Task<IActionResult> Update(Guid id, [FromBody]Invoice.Update.Product product)
+        {
+            await _module.ExecuteCommand(new UpdateProductCommand()
+            {
+                InvoiceId = id,
+                Name = product.Name,
+                NetPrice = product.NetPrice,
+                ProductId = product.ProductId,
+                Quantity = product.Quantity
+            });
+            return Ok();
+        }
+        [HttpDelete("{id}/products/{productId}")]
+        public async Task<IActionResult> Delete(Guid id, Guid productId)
+        {
+            await _module.ExecuteCommand(new DeleteProductFromInvoiceCommand()
+            {
+                InvoiceId = id,
+                ProductId = productId
+            });
+            return Ok();
         }
     } 
 }

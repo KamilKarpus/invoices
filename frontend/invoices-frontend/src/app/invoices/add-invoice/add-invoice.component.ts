@@ -6,6 +6,8 @@ import { SellerService } from '../services/seller.service';
 import { CompanyNameSeller } from '../models/seller/sellerCompanyName';
 import { InvoiceAdd } from '../models/invoices-add';
 import { InvoicesService } from '../services/invoices.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-invoice',
@@ -24,8 +26,9 @@ export class AddInvoiceComponent implements OnInit {
     seller: new FormControl('',[Validators.required]),
   });
 
+
   constructor(private customerService : CustomerService, private sellerService : SellerService,
-    private invoicesService : InvoicesService) { }
+    private invoicesService : InvoicesService, private toastr : ToastrService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -57,7 +60,10 @@ export class AddInvoiceComponent implements OnInit {
       var invoice = new InvoiceAdd(this.pickedCustomer.id,this.pickedSeller.id,
         "PLN",23);
         console.log(invoice);
-        this.invoicesService.addInvoices(invoice).subscribe(data => console.log(data));
+        this.invoicesService.addInvoices(invoice).subscribe(data => {
+          this.toastr.success('Udało się utworzyć nową fakturę!', 'Sukces');
+          this.router.navigate(["/invoices", data.id]);
+        });
     }
   }
 }

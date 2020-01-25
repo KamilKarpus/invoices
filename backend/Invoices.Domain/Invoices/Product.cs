@@ -27,14 +27,27 @@ namespace Invoices.Domain.Invoices
             Id = id;
             Name = name;
             NetPricePerUnit = new Money(netPrice, currency);
-            var grossPrice = (netPrice + (netPrice * vatRate.Fraction));
-            GrossPricePerUnit = new Money(grossPrice,currency);
-            NetPrice = NetPricePerUnit * quantity;
-            GrossPrice = GrossPricePerUnit * quantity;
-            VatValue = new Money((netPrice * vatRate.Fraction), currency);
             VatRate = vatRate;
             InvoiceId = invoiceId;
             Quantity = quantity;
+            ReCalculate(netPrice, currency, vatRate, quantity);
+        }
+        private void ReCalculate(decimal netPrice, string currency, Percentage vatRate, int quantity)
+        {
+            var grossPrice = (netPrice + (netPrice * vatRate.Fraction));
+            GrossPricePerUnit = new Money(grossPrice, currency);
+            NetPrice = NetPricePerUnit * quantity;
+            GrossPrice = GrossPricePerUnit * quantity;
+            VatValue = new Money((netPrice * vatRate.Fraction), currency);
+        }
+        public void UpdateProduct(string name, decimal netprice, int quantity)
+        {
+            Name = name;
+            NetPricePerUnit = new Money(netprice, NetPrice.Currency);
+            Quantity = quantity;
+            ReCalculate(netprice, NetPricePerUnit.Currency, VatRate, quantity);
+
+
         }
     }
 }

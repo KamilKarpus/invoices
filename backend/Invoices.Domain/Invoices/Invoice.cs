@@ -4,9 +4,9 @@ using Invoices.Common.Entitys;
 using Invoices.Domain.DomainEvents;
 using Invoices.Domain.ErrorCodes;
 using Invoices.Domain.Errors.Exceptions;
-using Invoices.Domain.RegisterOrganization;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Invoices.Domain.Invoices
 {
@@ -57,6 +57,40 @@ namespace Invoices.Domain.Invoices
             GrossToPay += product.GrossPrice;
             NetToPay += product.NetPrice;
             AddDomainEvent(new AddProductDomainEvent());
+        }
+        private void ReCalculate()
+        {
+            Money netToPay = Money.Zero(NetToPay.Currency);
+            Money grossToPay = Money.Zero(GrossToPay.Currency);
+            _products.ForEach(p =>
+                {
+                    netToPay += p.NetPrice;
+                    grossToPay += p.GrossPrice;
+                });
+            GrossToPay = grossToPay;
+            NetToPay = netToPay;
+            
+        }
+        public void UpdateProduct(Guid id, string name, decimal netprice,int quantity)
+        {
+            if (Status != InvoiceStatus.NotIssued)
+            {
+                throw new InvoiceException($"[{InvoiceErrorCodes.IssuedError}] You cannot add product to issued invoice.");
+            }
+            var product = _products.FirstOrDefault(p => p.Id == id);
+            product.UpdateProduct(name, netprice, quantity);
+            ReCalculate();
+        }
+
+        public void DeleteProduct(Guid productId)
+        {
+            if (Status != InvoiceStatus.NotIssued)
+            {
+                throw new InvoiceException($"[{InvoiceErrorCodes.IssuedError}] You cannot add product to issued invoice.");
+            }
+            var product = _products.FirstOrDefault(p => p.Id == productId);
+            _products.Remove(product);
+            ReCalculate();
         }
 
     }

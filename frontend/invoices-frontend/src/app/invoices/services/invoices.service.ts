@@ -6,7 +6,8 @@ import { environment } from 'src/environments/environment';
 import { InvoiceAdd } from '../models/invoices-add';
 import { InvoicesInfoView } from '../models/invoices-view';
 import { ProductPagedList } from '../models/product/productpagedlist';
-import { ProductAdd } from '../models/product/product-add-model';
+import { ProductDTO } from '../models/product/product-add-model';
+import { ProductUpdate } from '../models/product/product-update-model';
 
 
 
@@ -42,9 +43,19 @@ export class InvoicesService{
             } 
         });
     }
-    public addProduct(product: ProductAdd) : Observable<any>{
+    public addProduct(product: ProductDTO) : Observable<any>{
         var url = `${environment.apiUrl}${this.baseUrl}/product`;
         return this.http.post<any>(url, product);
+    }
+
+    public updateProduct(id, product : ProductUpdate) : Observable<any>{
+        var url = `${environment.apiUrl}${this.baseUrl}/${id}/products`;
+        return this.http.put<any>(url, product);
+    }
+
+    public deleteProduct(id, productId) : Observable<any>{
+        var url = `${environment.apiUrl}${this.baseUrl}/${id}/products/${productId}`;
+        return this.http.delete<any>(url);
     }
   
 }

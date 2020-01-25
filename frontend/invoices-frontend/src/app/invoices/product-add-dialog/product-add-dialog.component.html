@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Dodaj Produkt</h1>
+<h1 mat-dialog-title>Produkt</h1>
 <form [formGroup]="productForm">
 <div mat-dialog-content>
   <table class="full-width" cellspacing="0"><tr>
@@ -7,11 +7,11 @@
       <mat-error>Pole jest wymagane!</mat-error>
     </mat-form-field></td>
     <td><mat-form-field class="full-width">
-      <input matInput placeholder="Cen Netto za jednostkę"  formControlName="price">
+      <input matInput placeholder="Cen Netto za jednostkę"  formControlName="price" type="number"> 
       <mat-error>Pole jest wymagane!</mat-error>
     </mat-form-field></td>
     <td><mat-form-field class="full-width">
-      <input matInput placeholder="Ilość"  formControlName="quantity">
+      <input matInput placeholder="Ilość"  formControlName="quantity" type="number">
       <mat-error>Pole jest wymagane!</mat-error>
     </mat-form-field></td>
   </tr></table>

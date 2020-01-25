@@ -14,11 +14,12 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MenuComponent } from './menu/menu.component';
 import { InvoicesInfoComponent } from './invoices-info/invoices-info.component';
 import { ProductAddDialogComponent } from './product-add-dialog/product-add-dialog.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 
 
 @NgModule({
-  declarations: [InvoicesListComponent, InvoiceComponent, AddInvoiceComponent, MenuComponent, InvoicesInfoComponent, ProductAddDialogComponent],
+  declarations: [InvoicesListComponent, InvoiceComponent, AddInvoiceComponent, MenuComponent, InvoicesInfoComponent, ProductAddDialogComponent, ConfirmationDialogComponent],
   imports: [
     CommonModule,
     InvoicesRoutes,
@@ -27,7 +28,10 @@ import { ProductAddDialogComponent } from './product-add-dialog/product-add-dial
     ReactiveFormsModule,
     FormsModule
   ],
-  entryComponents:[ProductAddDialogComponent],
+  entryComponents:[
+                    ProductAddDialogComponent,
+                    ConfirmationDialogComponent 
+                  ],
   bootstrap: [InvoiceComponent],
   providers : [InvoicesService, 
               CustomerService,

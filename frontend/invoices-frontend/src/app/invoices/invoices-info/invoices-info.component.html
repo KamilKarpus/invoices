@@ -67,14 +67,30 @@
     
     <ng-container matColumnDef="net">
       <th mat-header-cell *matHeaderCellDef> Cena Netto</th>
-      <td mat-cell *matCellDef="let product"> {{product.netperunit | currency:" ":"symbol":"4.2-2"}} PLN</td>
-      <td mat-footer-cell *matFooterCellDef> {{products.netToPay | currency:" ":"symbol":"4.2-2"}} PLN </td>
+      <td mat-cell *matCellDef="let product"> {{product.netperunit | currency:" ":"symbol"}} PLN</td>
+      <td mat-footer-cell *matFooterCellDef> {{products.netToPay | currency:" ":"symbol"}} PLN </td>
     </ng-container>
   
     <ng-container matColumnDef="gross">
       <th mat-header-cell *matHeaderCellDef> Cena Brutto </th>
-      <td mat-cell *matCellDef="let product"> {{product.grossperunit | currency:" ":"symbol":"4.2-2"}} PLN </td>
-      <td mat-footer-cell *matFooterCellDef> {{products.grossToPay |currency:" ":"symbol":"4.2-2"}} PLN </td>
+      <td mat-cell *matCellDef="let product"> {{product.grossperunit | currency:" ":"symbol"}} PLN </td>
+      <td mat-footer-cell *matFooterCellDef> {{products.grossToPay |currency:" ":"symbol"}} PLN </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let product" > 
+        <button mat-button (click)="editDialog(product)">
+        <i class="material-icons">
+        edit
+        </i>
+      </button>
+      <button mat-button (click)="deleteProduct(product)">
+        <i class="material-icons">
+        delete
+        </i></button>
+    </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

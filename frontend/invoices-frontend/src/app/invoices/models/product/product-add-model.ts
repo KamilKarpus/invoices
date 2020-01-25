@@ -1,4 +1,4 @@
-export class ProductAdd{
+export class ProductDTO{
     constructor(
         public invoiceId: string,
         public name: string,
