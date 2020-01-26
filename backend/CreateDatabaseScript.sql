@@ -101,3 +101,9 @@ create table Invoice(
 	Currency Varchar(100),
 	VatRate int
 );
+create table Jobs(
+	ID uuid PRIMARY KEY,
+	occurrenceDate Date,
+	type varchar(100),
+	InvoiceId uuid
+);

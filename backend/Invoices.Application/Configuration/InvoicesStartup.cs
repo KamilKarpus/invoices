@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Invoices.Application.Configuration.DataAccess;
 using Invoices.Application.Configuration.EventBus;
+using Invoices.Application.Configuration.Jobs;
 using Invoices.Application.Configuration.Medation;
 using Invoices.Application.Configuration.Processing;
 using System;
@@ -20,6 +21,7 @@ namespace Invoices.Application.Configuration
             containerBuilder.RegisterModule(new ProcessingModule());
             containerBuilder.RegisterModule(new MediatorModule());
             containerBuilder.RegisterModule(new EventBusModule());
+            containerBuilder.RegisterModule(new JobsModule());
             var container = containerBuilder.Build();
 
             InvoicesCompositionRoot.SetContainer(container);

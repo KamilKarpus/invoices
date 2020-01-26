@@ -44,6 +44,10 @@ namespace Invoices.Domain.Invoices
             CreationDate = creationDate;
             Status = InvoiceStatus.NotIssued;
             VatRate = Percentage.From(vatRate);
+            AddDomainEvent(new CreatedInvoiceDomainEvent
+            {
+                InvoiceId = id
+            });
         }
 
         public void AddProduct(Guid id, Guid invoiceId, string name, decimal netPrice, int quantity)

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Administration.Application.Configuration;
 using Autofac;
 using Invoices.Application.Configuration;
+using Invoices.Application.Configuration.Jobs;
 using Invoices.Application.Configuration.Module;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,7 @@ namespace Invoices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHostedService<BackgroundWorker>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
