@@ -13,18 +13,29 @@ import { OrganizationInfoComponent } from './organization-info/organization-info
 import { OrganizationService } from './service/organization.service';
 import { OrganizationAddComponent } from './client-add/organization-add.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { OnlyNumber } from '../customInputs/digitsOnlyInput';
+import { SharedModule } from '../customInputs/sharedDirectives';
 
 
 
 @NgModule({
-  declarations: [CustomerComponent, MenuComponent, OrganizationAddComponent, CustomerListComponent, OrganizationListComponent, CustomerInfoComponent, OrganizationInfoComponent, AddCustomerComponent],
+  declarations: [CustomerComponent, 
+    MenuComponent, 
+    OrganizationAddComponent, 
+    CustomerListComponent, 
+    OrganizationListComponent, 
+    CustomerInfoComponent, 
+    OrganizationInfoComponent, 
+    AddCustomerComponent,
+  ],
   imports: [
     CommonModule,
     CustomerRoutes,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule 
   ],
   providers : [OrganizationService]
 })

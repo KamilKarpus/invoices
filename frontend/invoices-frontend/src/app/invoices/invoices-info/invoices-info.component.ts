@@ -74,7 +74,7 @@ export class InvoicesInfoComponent implements OnInit {
   }
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) { 
-    if(event.key == 'c' && this.flag == true){
+    if(event.key == 'c' && this.flag == true && this.InvoiceView.status == 1){
       this.flag= false;
       const dialogRef = this.dialog.open(ProductAddDialogComponent);
       dialogRef.afterClosed().subscribe(result => {
@@ -128,6 +128,23 @@ export class InvoicesInfoComponent implements OnInit {
             .subscribe(data=>{
               this.getProductInfo(this.InvoiceView.id);
               this.toastr.success(`Produkt został usunięty ${product.name}!`, 'Sukces');
+            });
+        }
+      });
+  }
+  openConfirmationDialog(){
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent,
+      {data: {title: 'Wystaw Fakturę',content: `Czy chcesz wystawić fakture?`}});
+
+      dialogRef.afterClosed().subscribe(result => {
+        if(result.confirmation === true){
+          this.invoiceService.issueInvoice(this.InvoiceView.id)
+            .subscribe(sub=>{
+              this.invoiceService.getInvoice(this.InvoiceView.id)
+              .subscribe(invoice=>{
+                this.InvoiceView = invoice;
+              });
+              this.toastr.success(`Faktura została wystawiona!`, 'Sukces');
             });
         }
       });

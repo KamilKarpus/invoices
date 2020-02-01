@@ -36,7 +36,11 @@ namespace Invoices.Application.Configuration.DataAccess.EntityConfiguration
                 b.Property(p => p.Currency).HasColumnName("currency");
                 b.Property(p => p.Value).HasColumnName("nettopay");
             });
-
+            builder.OwnsOne(p => p.LeftToPay, b =>
+            {
+                b.Property(p => p.Currency).HasColumnName("currency");
+                b.Property(p => p.Value).HasColumnName("lefttopay");
+            });
             builder.OwnsOne(p => p.Paid, b =>
             {
                 b.Property(p => p.Currency).HasColumnName("currency");

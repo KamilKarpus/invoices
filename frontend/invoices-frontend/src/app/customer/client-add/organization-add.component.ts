@@ -4,6 +4,7 @@ import { OrganizationService } from '../service/organization.service';
 import { AddOrganization } from '../model/addorganization';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { postalCodeValidator } from 'src/app/customValidators/postalCode.validator';
 
 @Component({
   selector: 'app-organization-add',
@@ -20,7 +21,7 @@ export class OrganizationAddComponent implements OnInit {
       nipControl : new FormControl('',[Validators.required,Validators.minLength(10), Validators.maxLength(10)]),
       adressControl : new FormControl('', [Validators.required]),
       cityControl : new FormControl('',[Validators.required]),
-      postalCodeControl : new FormControl('',[Validators.required])
+      postalCodeControl : new FormControl('',[Validators.required,Validators.pattern('^[0-9][0-9]-[0-9][0-9][0-9]$')])
     });
    }
   ngOnInit() {
@@ -38,7 +39,7 @@ export class OrganizationAddComponent implements OnInit {
       this.service.addOrganization(customer).subscribe(
         data=>{
           this.toastr.success('Udało się dodać nowego klienta!', 'Sukces');
-          this.router.navigate(["/customer", data.id]);
+          this.router.navigate(["/organization", data.id]);
         }
       );
 

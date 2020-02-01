@@ -10,12 +10,15 @@ import { SellerService } from './services/seller-service';
 import { SellerinfoComponent } from './sellerinfo/sellerinfo.component';
 import { AddsellerComponent } from './addseller/addseller.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SharedModule } from '../customInputs/sharedDirectives';
 
 @NgModule({
   declarations:  [
     SellerComponent, 
     MenuComponent, 
-    SellersListComponent, SellerinfoComponent, AddsellerComponent
+    SellersListComponent, 
+    SellerinfoComponent, 
+    AddsellerComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +26,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers : [SellerService],
   bootstrap: [SellerComponent]

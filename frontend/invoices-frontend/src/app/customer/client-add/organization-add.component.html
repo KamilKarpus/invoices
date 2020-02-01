@@ -25,14 +25,14 @@
           <td><mat-form-field class="full-width">
             <input matInput #postalCode maxlength="6" placeholder="Kod Pocztowy" formControlName="postalCodeControl">
             <mat-error>
-              Pole Kod Pocztowy jest <strong>wymagane!</strong>
+              Pole Kod Pocztowy jest <strong>wymagane! Format kodu pocztowego ##-####</strong>
              </mat-error>
             <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
           </mat-form-field></td>
         </tr></table>
     
         <mat-form-field class="full-width">
-            <input matInput #nip placeholder="Nip" formControlName="nipControl" maxlength="10">
+            <input matInput #nip placeholder="Nip" formControlName="nipControl" maxlength="10"  OnlyNumber="true">
             <mat-error>
               Nip posiada <strong>{{nip.value.length}} /10 liczb!</strong>  
              </mat-error>

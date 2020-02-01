@@ -94,7 +94,7 @@ create table Invoice(
 	NetToPay decimal(9),
 	GrossToPay decimal(9),
 	Paid decimal(9),
-	LeftToPay decimal(2),
+	LeftToPay decimal(9),
 	Remarks varchar(100),
 	Status int,
 	SellerId uuid,

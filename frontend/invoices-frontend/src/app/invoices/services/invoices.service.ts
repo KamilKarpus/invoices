@@ -57,5 +57,9 @@ export class InvoicesService{
         var url = `${environment.apiUrl}${this.baseUrl}/${id}/products/${productId}`;
         return this.http.delete<any>(url);
     }
+    public issueInvoice(id) : Observable<any>{
+        var url = `${environment.apiUrl}${this.baseUrl}/${id}/issue`;
+        return this.http.put<any>(url,null);
+    }
   
 }

@@ -23,7 +23,7 @@ namespace Invoices.Domain.Invoices
         public Money GrossToPay { get; private set; }
         public Money NetToPay { get; private set; }
         public Money Paid { get; private set; }
-
+        public Money LeftToPay { get; private set; }
         public Guid SellerId { get; private set; }
         public InvoiceStatus Status { get; private set; }
         public Percentage VatRate { get; private set; }
@@ -41,6 +41,7 @@ namespace Invoices.Domain.Invoices
             NetToPay = new Money(0, currency);
             GrossToPay = new Money(0, currency);
             Paid = new Money(0, currency);
+            LeftToPay = new Money(0, currency);
             CreationDate = creationDate;
             Status = InvoiceStatus.NotIssued;
             VatRate = Percentage.From(vatRate);
@@ -50,6 +51,14 @@ namespace Invoices.Domain.Invoices
             });
         }
 
+        public void Issue()
+        {
+            if (Status != InvoiceStatus.NotIssued)
+            {
+                throw new InvoiceException($"[{InvoiceErrorCodes.IssuedError}]You cannot issue issued Invoice.");
+            }
+            Status = InvoiceStatus.Issued;
+        }
         public void AddProduct(Guid id, Guid invoiceId, string name, decimal netPrice, int quantity)
         {
             if(Status != InvoiceStatus.NotIssued)
@@ -60,6 +69,7 @@ namespace Invoices.Domain.Invoices
             _products.Add(product);
             GrossToPay += product.GrossPrice;
             NetToPay += product.NetPrice;
+            LeftToPay += product.NetPrice;
             AddDomainEvent(new AddProductDomainEvent());
         }
         private void ReCalculate()
@@ -73,6 +83,7 @@ namespace Invoices.Domain.Invoices
                 });
             GrossToPay = grossToPay;
             NetToPay = netToPay;
+            LeftToPay = grossToPay;
             
         }
         public void UpdateProduct(Guid id, string name, decimal netprice,int quantity)

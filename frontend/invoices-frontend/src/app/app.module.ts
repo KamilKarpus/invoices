@@ -8,6 +8,7 @@ import { MaterialModule } from './material/material-module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './home/home.component';
+import { OnlyNumber } from './customInputs/digitsOnlyInput';
 
 @NgModule({
   declarations: [

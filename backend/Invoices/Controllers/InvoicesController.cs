@@ -56,5 +56,15 @@ namespace Invoices.Controllers
             });
             return Ok();
         }
+
+        [HttpPut("{id}/issue")]
+        public async Task<IActionResult> IssueInvoice(Guid id)
+        {
+            await _module.ExecuteCommand(new IssueInvoiceCommand()
+            {
+                Id = id
+            });
+            return Ok();
+        }
     } 
 }
