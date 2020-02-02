@@ -2,7 +2,9 @@
   <mat-toolbar>
     <mat-toolbar-row>
       <span class="mr-5"><button mat-flat-button color="primary" [disabled]="InvoiceView.status == 2" (click)="openDialog()">Dodaj produkt</button></span>
-      <span><button mat-flat-button color [disabled]="InvoiceView.status == 2"  (click)="openConfirmationDialog()">Wystaw Fakture</button></span>
+      <span class="mr-5"><button mat-flat-button color [disabled]="InvoiceView.status == 2"  (click)="openConfirmationDialog()">Wystaw Fakture</button></span>
+      <span class="mr-5"><button mat-flat-button color [disabled]="InvoiceView.status == 1 || fileInfo != null" (click)="prepareFile()">Przygotuj plik PDF</button></span>
+      <span class="mr-5"><button mat-flat-button color [disabled]="fileInfo == null" (click)="download()">Pobierz plik PDF</button></span>
     </mat-toolbar-row>
   </mat-toolbar>
 <table class="full-width" cellspacing="0"><tr>

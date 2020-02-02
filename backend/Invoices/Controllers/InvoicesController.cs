@@ -66,5 +66,14 @@ namespace Invoices.Controllers
             });
             return Ok();
         }
+        [HttpPost("{id}/pdf")]
+        public async Task<IActionResult> CreatePDF(Guid id)
+        {
+            await _module.ExecuteCommand(new CreateInvoicePDFCommand()
+            {
+                Id = id
+            });
+            return Ok();
+        }
     } 
 }

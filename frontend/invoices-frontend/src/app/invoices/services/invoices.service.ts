@@ -8,6 +8,7 @@ import { InvoicesInfoView } from '../models/invoices-view';
 import { ProductPagedList } from '../models/product/productpagedlist';
 import { ProductDTO } from '../models/product/product-add-model';
 import { ProductUpdate } from '../models/product/product-update-model';
+import { FileInfo } from '../models/file';
 
 
 
@@ -60,6 +61,14 @@ export class InvoicesService{
     public issueInvoice(id) : Observable<any>{
         var url = `${environment.apiUrl}${this.baseUrl}/${id}/issue`;
         return this.http.put<any>(url,null);
+    }
+    public invoiceFileInfo(id) : Observable<FileInfo>{
+        var url = `${environment.apiUrl}${this.baseUrl}/${id}/files`;
+        return this.http.get<FileInfo>(url);
+    }
+    public prepareFile(id) : Observable<any>{
+        var url = `${environment.apiUrl}${this.baseUrl}/${id}/pdf`;
+        return this.http.post<any>(url,null);
     }
   
 }

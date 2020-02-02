@@ -15,6 +15,8 @@ import { ProductUpdate } from '../models/product/product-update-model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { FileInfo } from '../models/file';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-invoices-info',
@@ -29,6 +31,7 @@ export class InvoicesInfoComponent implements OnInit {
   public sellerInfo : SellerShortView;
   public products : ProductPagedList;
   private flag : boolean = true;
+  public fileInfo : FileInfo;
   public displayedColumns: string[] = ['product', 'quantity','net', 'gross', 'action'];
 
 
@@ -44,11 +47,16 @@ export class InvoicesInfoComponent implements OnInit {
         this.getCustomerInfo(data.customerid);
         this.getSellerInfo(data.sellerid);
         this.getProductInfo(data.id);
+        this.getFileInfo(data.id);
     
       });
     });
   }
-
+  getFileInfo(id){
+    this.invoiceService.invoiceFileInfo(id).subscribe(p=>{
+      this.fileInfo = p;
+    });
+  }
   getSellerInfo(id){
     this.sellerService.getSellerbyId(id).subscribe(data=>{
       this.sellerInfo = data;
@@ -149,5 +157,13 @@ export class InvoicesInfoComponent implements OnInit {
         }
       });
   }
+  download(){
+    window.open(`${environment.apiUrl}/invoices/${this.InvoiceView.id}/download`, "_blank")
+  }
 
+  prepareFile(){
+    this.invoiceService.prepareFile(this.InvoiceView.id).subscribe(p=>{
+      this.getFileInfo(this.InvoiceView.id);
+    })
+  }
 } 

@@ -5,7 +5,10 @@ using Invoices.Application.ReadModels;
 using Invoices.Application.ReadModels.Product;
 using Invoices.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using System;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using static Invoices.Model.Invoice;
 
@@ -49,6 +52,27 @@ namespace Invoices.QueryAPi
                 InvoiceId = id,
                 PageSize = paggination.PageSize,
                 CurrentPage = paggination.CurrentPage
+            });
+            return Ok(result);
+        }
+        [HttpGet("{id}/download")]
+        public async Task<IActionResult> GetInvoicePdf(Guid id)
+        {
+            var result = await _module.ExecuteQuery<CustomFileInfo>(new GetFileInfoQuery()
+            {
+                Id = id
+            });
+            IFileProvider provider = new PhysicalFileProvider(result.Path);
+            IFileInfo fileInfo = provider.GetFileInfo(result.Filename);
+            var readStream = fileInfo.CreateReadStream();
+            return File(readStream, result.Typa,result.Filename);
+        }
+        [HttpGet("{id}/files")]
+        public async Task<IActionResult> GetFileInfo(Guid id)
+        {
+            var result = await _module.ExecuteQuery<CustomFileInfo>(new GetFileInfoQuery()
+            {
+                Id = id
             });
             return Ok(result);
         }

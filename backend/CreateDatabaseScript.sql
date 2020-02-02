@@ -107,3 +107,11 @@ create table Jobs(
 	type varchar(100),
 	InvoiceId uuid
 );
+create table Files(
+	ID uuid PRIMARY KEY,
+	occuranceDate Date,
+	typa varchar(30),
+	fileName varchar(100),
+	invoiceId varchar(100),
+	path varchar(100)
+);

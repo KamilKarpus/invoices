@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using DinkToPdf;
 using Infrastructure;
 using Invoices.Application.Services;
 using Microsoft.EntityFrameworkCore;
